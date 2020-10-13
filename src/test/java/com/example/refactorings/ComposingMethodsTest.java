@@ -5,6 +5,8 @@ import java.util.List;
 public class ComposingMethodsTest {
     private List<Order> orders;
     private String name;
+    private int quantity;
+    private int itemPrice;
 
     class Order {
         private double amount;
@@ -41,5 +43,16 @@ public class ComposingMethodsTest {
         System.out.println ("**************************");
         System.out.println ("***** Customer Owes ******");
         System.out.println ("**************************");
+    }
+
+    double getPrice() {
+        final int basePrice = quantity * itemPrice;
+        final double discountFactor;
+
+        if (basePrice > 1000)
+            discountFactor = 0.95;
+        else
+            discountFactor = 0.98;
+        return basePrice * discountFactor;
     }
 }
