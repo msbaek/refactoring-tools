@@ -23,7 +23,11 @@ public class ComposingMethodsTest {
         for(Order each : orders) {
             outstanding += each.getAmount();
         }
+        printDetails(outstanding);
 
+    }
+
+    private void printDetails(double outstanding) {
         //print details
         System.out.println ("name:" + name);
         System.out.println ("amount" + outstanding);
