@@ -46,8 +46,7 @@ public class ComposingMethodsTest {
     }
 
     double getPrice() {
-        final double discountFactor = getDiscountFactor();
-        return basePrice() * discountFactor;
+        return basePrice() * getDiscountFactor();
     }
 
     private double getDiscountFactor() {
