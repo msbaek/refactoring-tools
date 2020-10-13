@@ -46,13 +46,16 @@ public class ComposingMethodsTest {
     }
 
     double getPrice() {
-        final int basePrice = quantity * itemPrice;
         final double discountFactor;
 
-        if (basePrice > 1000)
+        if (basePrice() > 1000)
             discountFactor = 0.95;
         else
             discountFactor = 0.98;
-        return basePrice * discountFactor;
+        return basePrice() * discountFactor;
+    }
+
+    private int basePrice() {
+        return quantity * itemPrice;
     }
 }
