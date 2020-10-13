@@ -17,10 +17,7 @@ public class ComposingMethodsTest {
     void printOwing() {
         double outstanding = 0.0;
 
-        // print banner
-        System.out.println ("**************************");
-        System.out.println ("***** Customer Owes ******");
-        System.out.println ("**************************");
+        printBanner();
 
         // calculate outstanding
         for(Order each : orders) {
@@ -30,5 +27,12 @@ public class ComposingMethodsTest {
         //print details
         System.out.println ("name:" + name);
         System.out.println ("amount" + outstanding);
+    }
+
+    private void printBanner() {
+        // print banner
+        System.out.println ("**************************");
+        System.out.println ("***** Customer Owes ******");
+        System.out.println ("**************************");
     }
 }
