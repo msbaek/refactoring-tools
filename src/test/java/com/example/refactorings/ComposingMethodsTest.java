@@ -15,16 +15,19 @@ public class ComposingMethodsTest {
     }
 
     void printOwing() {
-        double outstanding = 0.0;
-
         printBanner();
+        double outstanding = getOutstanding();
+        printDetails(outstanding);
 
+    }
+
+    private double getOutstanding() {
+        double outstanding = 0.0;
         // calculate outstanding
         for(Order each : orders) {
             outstanding += each.getAmount();
         }
-        printDetails(outstanding);
-
+        return outstanding;
     }
 
     private void printDetails(double outstanding) {
