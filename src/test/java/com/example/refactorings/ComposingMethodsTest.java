@@ -7,6 +7,10 @@ public class ComposingMethodsTest {
     private String name;
     private int quantity;
     private int itemPrice;
+    private double primaryForce;
+    private double mass;
+    private int delay;
+    private double secondaryForce;
 
     class Order {
         private double amount;
@@ -46,28 +50,50 @@ public class ComposingMethodsTest {
     }
 
     double getPrice() {
-        return basePrice() * getDiscountFactor();
+        return basePrice1() * getDiscountFactor();
     }
 
     private double getDiscountFactor() {
         final double discountFactor;
 
-        if (basePrice() > 1000)
+        if (basePrice1() > 1000)
             discountFactor = 0.95;
         else
             discountFactor = 0.98;
         return discountFactor;
     }
 
+    private int basePrice1() {
+        return basePrice();
+    }
+
+    double price() {
+        return basePrice() - quantityDiscount() + shipping();
+    }
+
+    private double shipping() {
+        return Math.min(quantity * itemPrice * 0.1, 100.0);
+    }
+
+    private double quantityDiscount() {
+        return Math.max(0, quantity - 500) * itemPrice * 0.05;
+    }
+
     private int basePrice() {
         return quantity * itemPrice;
     }
 
-    double price() {
-        final int basePrice = quantity * itemPrice;
-        final double quantityDiscount = Math.max(0, quantity - 500) * itemPrice * 0.05;
-        final double shipping = Math.min(basePrice * 0.1, 100.0);
-
-        return basePrice - quantityDiscount + shipping;
+    double getDistanceTravelled(int time) {
+        double result;
+        final double primaryAcc = primaryForce / mass;
+        int primaryTime = Math.min(time, delay);
+        result = 0.5 * primaryAcc * primaryTime * primaryTime;
+        int secondaryTime = time - delay;
+        if (secondaryTime > 0) {
+            double primaryVel = primaryAcc * delay;
+            double acc = (primaryForce + secondaryForce) / mass;
+            result += primaryVel * secondaryTime + 0.5 * acc * secondaryTime * secondaryTime;
+        }
+        return result;
     }
 }
