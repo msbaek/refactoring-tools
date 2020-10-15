@@ -113,29 +113,32 @@ public class ComposingMethodsTest {
         }
 
         int gamma(int inputVal, int quantity, int yearToDate) {
-            return new Gamma(inputVal, quantity, yearToDate).invoke();
+            return new ComposingMethodsTest.Gamma(this, inputVal, quantity, yearToDate).invoke();
         }
 
-        private class Gamma {
-            private int inputVal;
-            private int quantity;
-            private int yearToDate;
+    }
 
-            public Gamma(int inputVal, int quantity, int yearToDate) {
-                this.inputVal = inputVal;
-                this.quantity = quantity;
-                this.yearToDate = yearToDate;
-            }
+    private class Gamma {
+        private final Account account;
+        private int inputVal;
+        private int quantity;
+        private int yearToDate;
 
-            public int invoke() {
-                int importantValue1 = (inputVal * quantity) + delta();
-                int importantValue2 = (inputVal * yearToDate) + 100;
-                if ((yearToDate - importantValue1) > 100)
-                    importantValue2 -= 20;
-                int importantValue3 = importantValue2 * 7;
-                // and so on.
-                return importantValue3 - 2 * importantValue1;
-            }
+        public Gamma(Account account, int inputVal, int quantity, int yearToDate) {
+            this.account = account;
+            this.inputVal = inputVal;
+            this.quantity = quantity;
+            this.yearToDate = yearToDate;
+        }
+
+        public int invoke() {
+            int importantValue1 = (inputVal * quantity) + account.delta();
+            int importantValue2 = (inputVal * yearToDate) + 100;
+            if ((yearToDate - importantValue1) > 100)
+                importantValue2 -= 20;
+            int importantValue3 = importantValue2 * 7;
+            // and so on.
+            return importantValue3 - 2 * importantValue1;
         }
     }
 }
