@@ -64,10 +64,10 @@ public class ComposingMethodsTest {
     }
 
     double price() {
-        // price is base price - quantity discount + shipping
         final int basePrice = quantity * itemPrice;
-        return basePrice -
-                Math.max(0, quantity - 500) * itemPrice * 0.05 +
-                Math.min(basePrice * 0.1, 100.0);
+        final double quantityDiscount = Math.max(0, quantity - 500) * itemPrice * 0.05;
+        final double shipping = Math.min(basePrice * 0.1, 100.0);
+
+        return basePrice - quantityDiscount + shipping;
     }
 }
