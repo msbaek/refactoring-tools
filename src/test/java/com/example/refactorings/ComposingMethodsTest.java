@@ -91,8 +91,8 @@ public class ComposingMethodsTest {
         int secondaryTime = time - delay;
         if (secondaryTime > 0) {
             double primaryVel = primaryAcc * delay;
-            double acc = (primaryForce + secondaryForce) / mass;
-            result += primaryVel * secondaryTime + 0.5 * acc * secondaryTime * secondaryTime;
+            final double secondaryAcc = (primaryForce + secondaryForce) / mass;
+            result += primaryVel * secondaryTime + 0.5 * secondaryAcc * secondaryTime * secondaryTime;
         }
         return result;
     }
