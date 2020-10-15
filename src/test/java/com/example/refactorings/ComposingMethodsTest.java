@@ -26,7 +26,7 @@ public class ComposingMethodsTest {
     private double getOutstanding() {
         double outstanding = 0.0;
         // calculate outstanding
-        for(Order each : orders) {
+        for (Order each : orders) {
             outstanding += each.getAmount();
         }
         return outstanding;
@@ -34,15 +34,15 @@ public class ComposingMethodsTest {
 
     private void printDetails(double outstanding) {
         //print details
-        System.out.println ("name:" + name);
-        System.out.println ("amount" + outstanding);
+        System.out.println("name:" + name);
+        System.out.println("amount" + outstanding);
     }
 
     private void printBanner() {
         // print banner
-        System.out.println ("**************************");
-        System.out.println ("***** Customer Owes ******");
-        System.out.println ("**************************");
+        System.out.println("**************************");
+        System.out.println("***** Customer Owes ******");
+        System.out.println("**************************");
     }
 
     double getPrice() {
@@ -61,5 +61,12 @@ public class ComposingMethodsTest {
 
     private int basePrice() {
         return quantity * itemPrice;
+    }
+
+    double price() {
+        // price is base price - quantity discount + shipping
+        return quantity * itemPrice -
+                Math.max(0, quantity - 500) * itemPrice * 0.05 +
+                Math.min(quantity * itemPrice * 0.1, 100.0);
     }
 }
