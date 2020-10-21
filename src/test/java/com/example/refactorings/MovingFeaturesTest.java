@@ -13,8 +13,6 @@ class Account1 {
 }
 
 class AccountType {
-    private double _interestRate;
-
     public boolean isPremium() {
         throw new UnsupportedOperationException();
     }
@@ -30,20 +28,14 @@ class AccountType {
             return daysOverdrawn * 1.75;
     }
 
-    public double get_interestRate() {
-        return _interestRate;
-    }
-
-    public void set_interestRate(double _interestRate) {
-        this._interestRate = _interestRate;
-    }
 }
 
 class Account {
     private AccountType _type;
+    private double _interestRate;
 
     double interestForAmountDays(double amount, int days) {
-        return _type.get_interestRate() * amount * days / 365;
+        return _interestRate * amount * days / 365;
     }
 }
 
