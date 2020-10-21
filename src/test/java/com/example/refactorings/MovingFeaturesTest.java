@@ -86,3 +86,6 @@ class Person {
     private String officeAreaCode;
     private String officeNumber;
 }
+
+class TelephoneNumber {
+}
