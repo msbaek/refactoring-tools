@@ -13,6 +13,8 @@ class Account1 {
 }
 
 class AccountType {
+    private double _interestRate;
+
     public boolean isPremium() {
         throw new UnsupportedOperationException();
     }
@@ -28,22 +30,28 @@ class AccountType {
             return daysOverdrawn * 1.75;
     }
 
-}
-
-class Account {
-    private AccountType _type;
-    private double _interestRate;
-
-    double interestForAmountDays(double amount, int days) {
-        return get_interestRate() * amount * days / 365;
-    }
-
     public double get_interestRate() {
         return _interestRate;
     }
 
     public void set_interestRate(double _interestRate) {
         this._interestRate = _interestRate;
+    }
+}
+
+class Account {
+    private AccountType _type;
+
+    double interestForAmountDays(double amount, int days) {
+        return get_interestRate() * amount * days / 365;
+    }
+
+    public double get_interestRate() {
+        return _type.get_interestRate();
+    }
+
+    public void set_interestRate(double _interestRate) {
+        _type.set_interestRate(_interestRate);
     }
 }
 
