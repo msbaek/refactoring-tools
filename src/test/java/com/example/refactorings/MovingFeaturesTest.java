@@ -25,8 +25,7 @@ class AccountType {
             if (daysOverdrawn > 7)
                 result += (daysOverdrawn - 7) * 0.85;
             return result;
-        }
-        else
+        } else
             return daysOverdrawn * 1.75;
     }
 
@@ -56,4 +55,34 @@ class Account {
 }
 
 public class MovingFeaturesTest {
+}
+
+class Person {
+    public String getName() {
+        return name;
+    }
+
+    public String getTelephoneNumber() {
+        return ("(" + officeAreaCode + ") " + officeNumber);
+    }
+
+    String getOfficeAreaCode() {
+        return officeAreaCode;
+    }
+
+    void setOfficeAreaCode(String arg) {
+        officeAreaCode = arg;
+    }
+
+    String getOfficeNumber() {
+        return officeNumber;
+    }
+
+    void setOfficeNumber(String arg) {
+        officeNumber = arg;
+    }
+
+    private String name;
+    private String officeAreaCode;
+    private String officeNumber;
 }
