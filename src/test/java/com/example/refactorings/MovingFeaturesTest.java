@@ -58,6 +58,8 @@ public class MovingFeaturesTest {
 }
 
 class Person {
+    private TelephoneNumber officeTelephone = new TelephoneNumber();
+
     public String getName() {
         return name;
     }
