@@ -1,5 +1,17 @@
 package com.example.refactorings;
 
+class Account1 {
+    double bankCharge() {
+        double result = 4.5;
+        if (_daysOverdrawn > 0)
+            result += _type.overdraftCharge(this._daysOverdrawn);
+        return result;
+    }
+
+    private AccountType _type;
+    private int _daysOverdrawn;
+}
+
 class AccountType {
     public boolean isPremium() {
         throw new UnsupportedOperationException();
@@ -15,18 +27,16 @@ class AccountType {
         else
             return daysOverdrawn * 1.75;
     }
+
 }
 
 class Account {
-    double bankCharge() {
-        double result = 4.5;
-        if (_daysOverdrawn > 0)
-            result += _type.overdraftCharge(this._daysOverdrawn);
-        return result;
-    }
-
     private AccountType _type;
-    private int _daysOverdrawn;
+    private double _interestRate;
+
+    double interestForAmountDays(double amount, int days) {
+        return _interestRate * amount * days / 365;
+    }
 }
 
 public class MovingFeaturesTest {
