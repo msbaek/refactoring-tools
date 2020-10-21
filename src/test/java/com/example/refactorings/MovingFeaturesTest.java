@@ -65,11 +65,7 @@ class Person {
     }
 
     public String getTelephoneNumber() {
-        return getPhoneNumber();
-    }
-
-    private String getPhoneNumber() {
-        return "(" + officeTelephone.getOfficeAreaCode() + ") " + officeTelephone.getOfficeNumber();
+        return officeTelephone.getPhoneNumber();
     }
 
     private String name;
@@ -94,4 +90,8 @@ class TelephoneNumber {
 
     private String officeAreaCode;
     private String officeNumber;
+
+    String getPhoneNumber() {
+        return "(" + getOfficeAreaCode() + ") " + getOfficeNumber();
+    }
 }
