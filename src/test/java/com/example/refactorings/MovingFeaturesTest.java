@@ -68,6 +68,10 @@ class Person {
         return ("(" + officeAreaCode + ") " + officeNumber);
     }
 
+    private String name;
+}
+
+class TelephoneNumber {
     String getOfficeAreaCode() {
         return officeAreaCode;
     }
@@ -84,10 +88,6 @@ class Person {
         officeNumber = arg;
     }
 
-    private String name;
     private String officeAreaCode;
     private String officeNumber;
-}
-
-class TelephoneNumber {
 }
