@@ -146,6 +146,6 @@ class HideDelegateClient {
     private Person manager;
 
     void useManager() {
-        manager = john.getDepartment().getManager();
+        manager = john.getManager();
     }
 }
