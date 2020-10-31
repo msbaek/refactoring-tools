@@ -60,6 +60,22 @@ public class MovingFeaturesTest {
 class Person {
     private TelephoneNumber officeTelephone = new TelephoneNumber();
 
+    String getOfficeAreaCode() {
+        return officeTelephone.getOfficeAreaCode();
+    }
+
+    void setOfficeAreaCode(String arg) {
+        officeTelephone.setOfficeAreaCode(arg);
+    }
+
+    String getOfficeNumber() {
+        return officeTelephone.getOfficeNumber();
+    }
+
+    void setOfficeNumber(String arg) {
+        officeTelephone.setOfficeNumber(arg);
+    }
+
     public String getName() {
         return name;
     }
