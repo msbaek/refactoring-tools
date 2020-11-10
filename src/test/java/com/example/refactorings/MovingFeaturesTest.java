@@ -67,6 +67,7 @@ public class MovingFeaturesTest {
     }
 
     private static void nextDay(Date previousEnd) {
+        // TODO: foreign method; should be in server
         Date newStart = new Date(previousEnd.getYear(),
                 previousEnd.getMonth(), previousEnd.getDate() + 1);
     }
