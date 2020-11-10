@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 class Account1 {
     double bankCharge() {
         double result = 4.5;
@@ -70,6 +72,23 @@ public class MovingFeaturesTest {
         // TODO: foreign method; should be in server
         Date newStart = new Date(previousEnd.getYear(),
                 previousEnd.getMonth(), previousEnd.getDate() + 1);
+    }
+
+    @Test
+    void localExtension__with__subclassing__problem() {
+        class OriginalClass {
+            String s;
+        }
+
+        class ExtensionClass extends OriginalClass {
+            Long l;
+        }
+
+        OriginalClass originalClass = new OriginalClass();
+        originalClass.s = "originalClass";
+
+        originalClass = new ExtensionClass();
+        assertThat(originalClass.s).isEqualTo("originalClass");
     }
 }
 
