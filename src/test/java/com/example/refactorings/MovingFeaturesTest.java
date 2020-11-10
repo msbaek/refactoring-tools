@@ -115,6 +115,10 @@ class TelephoneNumber {
 class Person {
     Department _department;
 
+    public Department get_department() {
+        return _department;
+    }
+
     public Person getManager() {
         return _department.getManager();
     }
