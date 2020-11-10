@@ -80,15 +80,20 @@ public class MovingFeaturesTest {
             String s;
         }
 
-        class ExtensionClass extends OriginalClass {
+        class ExtensionClass {
+            final OriginalClass originalClass;
             Long l;
+
+            ExtensionClass(OriginalClass originalClass) {
+                this.originalClass = originalClass;
+            }
         }
 
         OriginalClass originalClass = new OriginalClass();
         originalClass.s = "originalClass";
 
-        originalClass = new ExtensionClass();
-        assertThat(originalClass.s).isEqualTo("originalClass");
+        final ExtensionClass extensionClass = new ExtensionClass(originalClass);
+        assertThat(extensionClass.originalClass.s).isEqualTo("originalClass");
     }
 }
 
