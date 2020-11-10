@@ -115,17 +115,12 @@ class TelephoneNumber {
 class Person {
     Department _department;
 
-    public void setDepartment(Department arg) {
-        _department = arg;
-    }
-
     public Person getManager() {
         return _department.getManager();
     }
 }
 
 class Department {
-    private String _chargeCode;
     private Person _manager;
 
     public Department(Person manager) {
@@ -134,6 +129,15 @@ class Department {
 
     public Person getManager() {
         return _manager;
+    }
+}
+
+class RemoveMiddleManClient {
+    private Person john;
+    private Person manager;
+
+    void useManager() {
+        manager = john.getManager();
     }
 }
 
