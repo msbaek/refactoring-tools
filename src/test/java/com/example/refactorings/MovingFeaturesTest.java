@@ -63,15 +63,9 @@ class Account {
 public class MovingFeaturesTest {
     @Test
     void introduceForeignMethod() {
-        Date previousEnd = new Date();
+        MfDateSub previousEnd = new MfDateSub(new Date());
 
-        nextDay(previousEnd);
-    }
-
-    private static void nextDay(Date previousEnd) {
-        // TODO: foreign method; should be in server
-        Date newStart = new Date(previousEnd.getYear(),
-                previousEnd.getMonth(), previousEnd.getDate() + 1);
+        previousEnd.nextDay();
     }
 
     @Test
@@ -94,6 +88,22 @@ public class MovingFeaturesTest {
 
         final ExtensionClass extensionClass = new ExtensionClass(originalClass);
         assertThat(extensionClass.originalClass.s).isEqualTo("originalClass");
+    }
+}
+
+class MfDateSub extends Date {
+    public MfDateSub(String dateString) {
+        super(dateString);
+    }
+
+    public MfDateSub(Date date) {
+        super(date.getTime());
+    }
+
+    Date nextDay() {
+        // TODO: foreign method; should be in server
+        return new Date(getYear(),
+                getMonth(), getDate() + 1);
     }
 }
 
