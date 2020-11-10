@@ -1,5 +1,9 @@
 package com.example.refactorings;
 
+import org.junit.jupiter.api.Test;
+
+import java.util.Date;
+
 class Account1 {
     double bankCharge() {
         double result = 4.5;
@@ -55,6 +59,13 @@ class Account {
 }
 
 public class MovingFeaturesTest {
+    @Test
+    void introduceForeignMethod() {
+        Date previousEnd = new Date();
+
+        Date newStart = new Date(previousEnd.getYear(),
+                previousEnd.getMonth(), previousEnd.getDate() + 1);
+    }
 }
 
 class Person1 {
@@ -150,3 +161,4 @@ class HideDelegateClient {
                       .getManager();
     }
 }
+
