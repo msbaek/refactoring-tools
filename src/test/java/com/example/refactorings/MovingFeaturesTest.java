@@ -118,10 +118,6 @@ class Person {
     public Department get_department() {
         return _department;
     }
-
-    public Person getManager() {
-        return _department.getManager();
-    }
 }
 
 class Department {
@@ -150,6 +146,7 @@ class HideDelegateClient {
     private Person manager;
 
     void useManager() {
-        manager = john.getManager();
+        manager = john.get_department()
+                      .getManager();
     }
 }
