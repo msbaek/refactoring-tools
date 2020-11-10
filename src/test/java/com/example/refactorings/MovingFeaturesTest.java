@@ -141,7 +141,7 @@ class RemoveMiddleManClient {
     private Person manager;
 
     void useManager() {
-        manager = john.getManager();
+        manager = john.get_department().getManager();
     }
 }
 
