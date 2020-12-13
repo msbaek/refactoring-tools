@@ -5,8 +5,12 @@ import java.util.List;
 class Customer {
     private final String name;
 
-    public Customer(String name) {
+    private Customer(String name) {
         this.name = name;
+    }
+
+    public static Customer create(String name) {
+        return new Customer(name);
     }
 
     public String getName() {
@@ -16,11 +20,11 @@ class Customer {
 
 class Order {
     public Order(String customerName) {
-        customer = new Customer(customerName);
+        customer = Customer.create(customerName);
     }
 
     public void setCustomer(String customerName) {
-        customer = new Customer(customerName);
+        customer = Customer.create(customerName);
     }
 
     public String getCustomerName() {
