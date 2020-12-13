@@ -45,5 +45,20 @@ class ChangeValueToReferenceClient {
     }
 }
 
+class Currency {
+    private String code;
+
+    public String getCode() {
+        return code;
+    }
+
+    private Currency(String code) {
+        this.code = code;
+    }
+}
+
+class CurrencyClient {
+}
+
 public class OrganizingDataTest {
 }
