@@ -1,5 +1,7 @@
 package com.example.refactorings;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -72,4 +74,13 @@ class Currency {
 }
 
 public class OrganizingDataTest {
+    @Test
+    void replaceArrayWithObject() {
+        String[] row = new String[3];
+        row [0] = "Liverpool";
+        row [1] = "15";
+
+        String name = row[0];
+        int wins = Integer.parseInt(row[1]);
+    }
 }
