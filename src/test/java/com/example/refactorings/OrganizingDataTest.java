@@ -34,7 +34,7 @@ class Order {
     private Customer customer;
 }
 
-public class OrganizingDataTest {
+class ChangeValueToReferenceClient {
     private static int numberOfOrdersFor(List<Order> orders, String customer) {
         int result = 0;
         for (Order each : orders) {
@@ -43,4 +43,7 @@ public class OrganizingDataTest {
         }
         return result;
     }
+}
+
+public class OrganizingDataTest {
 }
