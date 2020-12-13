@@ -74,6 +74,9 @@ class Currency {
 }
 
 public class OrganizingDataTest {
+    class Performance {
+    }
+
     @Test
     void replaceArrayWithObject() {
         String[] row = new String[3];
