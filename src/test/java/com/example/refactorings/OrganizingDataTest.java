@@ -1,6 +1,7 @@
 package com.example.refactorings;
 
 import java.util.List;
+import java.util.Objects;
 
 class Customer {
     private final String name;
@@ -55,9 +56,19 @@ class Currency {
     private Currency(String code) {
         this.code = code;
     }
-}
 
-class CurrencyClient {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Currency currency = (Currency) o;
+        return Objects.equals(code, currency.code);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(code);
+    }
 }
 
 public class OrganizingDataTest {
