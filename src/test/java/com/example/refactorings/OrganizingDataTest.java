@@ -75,7 +75,7 @@ class Currency {
 
 public class OrganizingDataTest {
     class Performance {
-        public String[] row = new String[3];
+        private String[] row = new String[3];
 
         public String getName() {
             return row[0];
