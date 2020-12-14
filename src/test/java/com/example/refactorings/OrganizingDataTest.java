@@ -128,29 +128,29 @@ public class OrganizingDataTest {
 
         public void focusLost(FocusEvent event) {
             Object object = event.getSource();
-            if (object == startField)
+            if (object == getStartField())
                 StartField_FocusLost(event);
-            else if (object == endField)
+            else if (object == getEndField())
                 EndField_FocusLost(event);
-            else if (object == lengthField)
+            else if (object == getLengthField())
                 LengthField_FocusLost(event);
         }
 
         private void StartField_FocusLost(FocusEvent event) {
-            if (isNotInteger(startField.getText()))
-                startField.setText("0");
+            if (isNotInteger(getStartField()))
+                setStartField("0");
             calculateLength();
         }
 
         private void EndField_FocusLost(FocusEvent event) {
-            if (isNotInteger(endField.getText()))
-                endField.setText("0");
+            if (isNotInteger(getEndField()))
+                setEndField("0");
             calculateLength();
         }
 
         private void LengthField_FocusLost(FocusEvent event) {
-            if (isNotInteger(lengthField.getText()))
-                lengthField.setText("0");
+            if (isNotInteger(getLengthField()))
+                setLengthField("0");
             calculateEnd();
         }
 
@@ -160,10 +160,10 @@ public class OrganizingDataTest {
 
         private void calculateLength() {
             try {
-                int start = Integer.parseInt(startField.getText());
-                int end = Integer.parseInt(endField.getText());
+                int start = Integer.parseInt(getStartField());
+                int end = Integer.parseInt(getEndField());
                 int length = end - start;
-                lengthField.setText(String.valueOf(length));
+                setLengthField(String.valueOf(length));
             } catch (NumberFormatException e) {
                 throw new RuntimeException("Unexpected Number Format Error");
             }
@@ -171,13 +171,37 @@ public class OrganizingDataTest {
 
         private void calculateEnd() {
             try {
-                int start = Integer.parseInt(startField.getText());
-                int length = Integer.parseInt(lengthField.getText());
+                int start = Integer.parseInt(getStartField());
+                int length = Integer.parseInt(getLengthField());
                 int end = start + length;
-                endField.setText(String.valueOf(end));
+                setEndField(String.valueOf(end));
             } catch (NumberFormatException e) {
                 throw new RuntimeException("Unexpected Number Format Error");
             }
+        }
+
+        public String getStartField() {
+            return startField.getText();
+        }
+
+        public void setStartField(String startField) {
+            this.startField.setText(startField);
+        }
+
+        public String getEndField() {
+            return endField.getText();
+        }
+
+        public void setEndField(String endField) {
+            this.endField.setText(endField);
+        }
+
+        public String getLengthField() {
+            return lengthField.getText();
+        }
+
+        public void setLengthField(String lengthField) {
+            this.lengthField.setText(lengthField);
         }
     }
 
