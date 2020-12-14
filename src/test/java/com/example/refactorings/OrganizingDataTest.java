@@ -110,6 +110,7 @@ public class OrganizingDataTest {
     }
 
     class SymFocus extends FocusAdapter {
+        private Interval subject;
         private TextField startField;
         private TextField endField;
         private TextField lengthField;
