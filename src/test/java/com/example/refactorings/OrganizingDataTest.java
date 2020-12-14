@@ -8,6 +8,7 @@ import java.awt.event.FocusEvent;
 import java.util.List;
 import java.util.Objects;
 import java.util.Observable;
+import java.util.Observer;
 
 class Customer {
     private final String name;
@@ -109,11 +110,21 @@ public class OrganizingDataTest {
         int wins = row.getWins();
     }
 
-    class SymFocus extends FocusAdapter {
+    class SymFocus extends FocusAdapter implements Observer {
         private Interval subject;
         private TextField startField;
         private TextField endField;
         private TextField lengthField;
+
+        public SymFocus() {
+            subject = new Interval();
+            subject.addObserver(this);
+            update(subject, null);
+        }
+
+        @Override
+        public void update(Observable o, Object arg) {
+        }
 
         public void focusLost(FocusEvent event) {
             Object object = event.getSource();
