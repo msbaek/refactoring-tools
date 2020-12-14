@@ -75,22 +75,23 @@ class Currency {
 
 public class OrganizingDataTest {
     class Performance {
-        private String[] row = new String[3];
+        private String name;
+        private int wins;
 
         public String getName() {
-            return row[0];
+            return name;
         }
 
         public void setName(String name) {
-            row[0] = name;
+            this.name = name;
         }
 
         public int getWins() {
-            return Integer.parseInt(row[1]);
+            return wins;
         }
 
         public void setWins(String wins) {
-            row[1] = wins;
+            this.wins = Integer.parseInt(wins);
         }
     }
 
