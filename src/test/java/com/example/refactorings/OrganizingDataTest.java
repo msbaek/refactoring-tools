@@ -80,11 +80,11 @@ public class OrganizingDataTest {
 
     @Test
     void replaceArrayWithObject() {
-        String[] row = new String[3];
-        row [0] = "Liverpool";
-        row [1] = "15";
+        Performance row = new Performance();
+        row.row[0] = "Liverpool";
+        row.row[1] = "15";
 
-        String name = row[0];
-        int wins = Integer.parseInt(row[1]);
+        String name = row.row[0];
+        int wins = Integer.parseInt(row.row[1]);
     }
 }
