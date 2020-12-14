@@ -124,6 +124,9 @@ public class OrganizingDataTest {
 
         @Override
         public void update(Observable o, Object arg) {
+            startField.setText(subject.getStart());
+            endField.setText(subject.getEnd());
+            lengthField.setText(subject.getLength());
         }
 
         public void focusLost(FocusEvent event) {
@@ -181,27 +184,27 @@ public class OrganizingDataTest {
         }
 
         public String getStartField() {
-            return startField.getText();
+            return subject.getStart();
         }
 
         public void setStartField(String startField) {
-            this.startField.setText(startField);
+            subject.setStart(startField);
         }
 
         public String getEndField() {
-            return endField.getText();
+            return subject.getEnd();
         }
 
         public void setEndField(String endField) {
-            this.endField.setText(endField);
+            subject.setEnd(endField);
         }
 
         public String getLengthField() {
-            return lengthField.getText();
+            return subject.getLength();
         }
 
         public void setLengthField(String lengthField) {
-            this.lengthField.setText(lengthField);
+            subject.setLength(lengthField);
         }
     }
 
