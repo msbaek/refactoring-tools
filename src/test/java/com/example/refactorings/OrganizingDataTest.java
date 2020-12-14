@@ -75,6 +75,7 @@ class Currency {
 
 public class OrganizingDataTest {
     class Performance {
+        public String[] row = new String[3];
     }
 
     @Test
