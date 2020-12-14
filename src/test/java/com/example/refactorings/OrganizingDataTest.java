@@ -76,15 +76,31 @@ class Currency {
 public class OrganizingDataTest {
     class Performance {
         public String[] row = new String[3];
+
+        public String getName() {
+            return row[0];
+        }
+
+        public void setName(String name) {
+            row[0] = name;
+        }
+
+        public int getWins() {
+            return Integer.parseInt(row[1]);
+        }
+
+        public void setWins(String wins) {
+            row[1] = wins;
+        }
     }
 
     @Test
     void replaceArrayWithObject() {
         Performance row = new Performance();
-        row.row[0] = "Liverpool";
-        row.row[1] = "15";
+        row.setName("Liverpool");
+        row.setWins("15");
 
-        String name = row.row[0];
-        int wins = Integer.parseInt(row.row[1]);
+        String name = row.getName();
+        int wins = row.getWins();
     }
 }
