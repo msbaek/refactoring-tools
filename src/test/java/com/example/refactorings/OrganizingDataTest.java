@@ -7,6 +7,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.util.List;
 import java.util.Objects;
+import java.util.Observable;
 
 class Customer {
     private final String name;
@@ -166,5 +167,8 @@ public class OrganizingDataTest {
                 throw new RuntimeException("Unexpected Number Format Error");
             }
         }
+    }
+
+    class Interval extends Observable {
     }
 }
