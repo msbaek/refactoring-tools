@@ -206,5 +206,34 @@ public class OrganizingDataTest {
     }
 
     class Interval extends Observable {
+        private String start;
+        private String end;
+        private String length;
+
+        public String getStart() {
+            return start;
+        }
+
+        public void setStart(String start) {
+            this.start = start;
+            super.setChanged();
+            notifyObservers();
+        }
+
+        public String getEnd() {
+            return end;
+        }
+
+        public void setEnd(String end) {
+            this.end = end;
+        }
+
+        public String getLength() {
+            return length;
+        }
+
+        public void setLength(String length) {
+            this.length = length;
+        }
     }
 }
