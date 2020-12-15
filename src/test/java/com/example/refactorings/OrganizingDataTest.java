@@ -247,19 +247,36 @@ public class OrganizingDataTest {
     }
 
     class IntRange {
-        private int low, high;
+        private int low;
+        private int high;
 
         boolean includes (int arg) {
-            return arg >= low && arg <= high;
+            return arg >= getLow() && arg <= getHigh();
         }
 
         void grow(int factor) {
-            high = high * factor;
+            setHigh(getHigh() * factor);
         }
 
         IntRange (int low, int high) {
             low = low;
             high = high;
+        }
+
+        public int getLow() {
+            return low;
+        }
+
+        public void setLow(int low) {
+            this.low = low;
+        }
+
+        public int getHigh() {
+            return high;
+        }
+
+        public void setHigh(int high) {
+            this.high = high;
         }
     }
 }
