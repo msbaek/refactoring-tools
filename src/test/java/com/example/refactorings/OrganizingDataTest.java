@@ -239,4 +239,27 @@ public class OrganizingDataTest {
             this.length = length;
         }
     }
+
+    @Test
+    void name() {
+        Long l = 1l;
+        System.out.println(l.equals(null));
+    }
+
+    class IntRange {
+        private int low, high;
+
+        boolean includes (int arg) {
+            return arg >= low && arg <= high;
+        }
+
+        void grow(int factor) {
+            high = high * factor;
+        }
+
+        IntRange (int low, int high) {
+            low = low;
+            high = high;
+        }
+    }
 }
