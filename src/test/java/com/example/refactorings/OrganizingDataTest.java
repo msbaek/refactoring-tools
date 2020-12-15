@@ -5,20 +5,31 @@ import org.junit.jupiter.api.Test;
 import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.util.List;
 import java.util.Objects;
 import java.util.Observable;
 import java.util.Observer;
 
-class Order {
+class Customer {
     private final String name;
 
-    public Order(String name) {
+    public Customer (String name) {
         this.name = name;
     }
 
     public String getName() {
         return name;
+    }
+}
+
+class Order {
+    private final Customer customer;
+
+    public Order(Customer customer) {
+        this.customer = customer;
+    }
+
+    public String getName() {
+        return customer.getName();
     }
 }
 
