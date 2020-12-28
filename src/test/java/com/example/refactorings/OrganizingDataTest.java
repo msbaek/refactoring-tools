@@ -11,7 +11,7 @@ class Customer {
     private Set<Order> orders = new HashSet<>();
     private final String name;
 
-    public Customer (String name) {
+    public Customer(String name) {
         this.name = name;
     }
 
@@ -33,7 +33,11 @@ class Order {
     }
 
     public void setCustomer(Customer customer) {
+        if (this.customer != null)
+            this.customer.friendOrders().remove(this);
         this.customer = customer;
+        if (this.customer != null)
+            this.customer.friendOrders().add(this);
     }
 }
 
@@ -234,7 +238,7 @@ public class OrganizingDataTest {
         private int low;
         private int high;
 
-        boolean includes (int arg) {
+        boolean includes(int arg) {
             return arg >= getLow() && arg <= getHigh();
         }
 
@@ -242,7 +246,7 @@ public class OrganizingDataTest {
             setHigh(getHigh() * factor);
         }
 
-        IntRange (int low, int high) {
+        IntRange(int low, int high) {
             low = low;
             high = high;
         }
