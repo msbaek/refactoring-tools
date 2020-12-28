@@ -18,6 +18,11 @@ class Customer {
     public String getName() {
         return name;
     }
+
+    Set friendOrders() {
+        /** should only be used by Order when modifying the association */
+        return orders;
+    }
 }
 
 class Order {
