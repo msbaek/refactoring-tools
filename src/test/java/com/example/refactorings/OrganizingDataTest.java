@@ -5,11 +5,10 @@ import org.junit.jupiter.api.Test;
 import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.util.Objects;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.*;
 
 class Customer {
+    private Set<Order> orders = new HashSet<>();
     private final String name;
 
     public Customer (String name) {
