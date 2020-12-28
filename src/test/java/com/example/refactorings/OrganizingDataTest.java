@@ -23,6 +23,10 @@ class Customer {
         /** should only be used by Order when modifying the association */
         return orders;
     }
+
+    public void addOrder(Order order) {
+        order.setCustomer(this);
+    }
 }
 
 class Order {
