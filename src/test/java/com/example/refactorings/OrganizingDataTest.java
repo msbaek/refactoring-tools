@@ -25,7 +25,6 @@ class Customer {
     }
 
     public void addOrder(Order order) {
-        order.setCustomer(this);
     }
 
     public int getDiscount() {
@@ -34,7 +33,7 @@ class Customer {
 }
 
 class Order {
-    public double getDiscountPrice() {
+    public double getDiscountPrice(Customer customer) {
         return getGrossPrice() * (1 - customer.getDiscount());
     }
 
