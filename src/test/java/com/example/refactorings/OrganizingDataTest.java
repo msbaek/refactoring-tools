@@ -27,21 +27,19 @@ class Customer {
     public void addOrder(Order order) {
         order.setCustomer(this);
     }
+
+    public int getDiscount() {
+        throw new UnsupportedOperationException();
+    }
 }
 
 class Order {
-    private Customer customer;
-
-    public Customer getCustomer() {
-        return customer;
+    public double getDiscountPrice() {
+        return getGrossPrice() * (1 - customer.getDiscount());
     }
 
-    public void setCustomer(Customer customer) {
-        if (this.customer != null)
-            this.customer.friendOrders().remove(this);
-        this.customer = customer;
-        if (this.customer != null)
-            this.customer.friendOrders().add(this);
+    private double getGrossPrice() {
+        throw new UnsupportedOperationException();
     }
 }
 
