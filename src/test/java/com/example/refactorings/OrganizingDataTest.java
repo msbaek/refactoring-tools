@@ -5,14 +5,30 @@ import org.junit.jupiter.api.Test;
 import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.util.List;
 import java.util.*;
 
 class Customer {
+    public List<Customer> lists = new ArrayList<>();
     private Set<Order> orders = new HashSet<>();
-    private final String name;
+    private String name;
+    private static Customer instance;
+
+    private Customer() {
+    }
 
     public Customer(String name) {
         this.name = name;
+    }
+
+    public static Customer getInstance() {
+        if (instance == null) {
+            synchronized (Customer.class) {
+                if (instance == null)
+                    instance = new Customer();
+            }
+        }
+        return instance;
     }
 
     public String getName() {
@@ -30,9 +46,21 @@ class Customer {
     public int getDiscount() {
         throw new UnsupportedOperationException();
     }
+
+    public boolean containsOrder(Order order) {
+        return orders.contains(order);
+    }
 }
 
 class Order {
+    Customer getCustomer() {
+        final List<Customer> lists = Customer.getInstance().lists;
+        return lists.stream()
+                    .filter(c -> c.containsOrder(this))
+                    .findFirst()
+                    .orElse(null);
+    }
+
     public double getDiscountPrice(Customer customer) {
         return getGrossPrice() * (1 - customer.getDiscount());
     }
