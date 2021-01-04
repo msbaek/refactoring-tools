@@ -354,10 +354,14 @@ public class OrganizingDataTest {
         kent.removeCourse(refactoring);
         assertThat(kent.getCourses().size()).isEqualTo(3);
 
-        long advancedCourceCount = kent.getCourses()
-                                       .stream()
-                                       .filter(c -> c.isAdvanced() == true)
-                                       .count();
+        long advancedCourceCount = numberOfAdvancedCourse(kent);
         assertThat(advancedCourceCount).isEqualTo(1);
+    }
+
+    private long numberOfAdvancedCourse(Person kent) {
+        return kent.getCourses()
+                   .stream()
+                   .filter(c -> c.isAdvanced() == true)
+                   .count();
     }
 }
