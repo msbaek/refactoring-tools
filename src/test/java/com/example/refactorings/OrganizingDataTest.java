@@ -298,8 +298,10 @@ public class OrganizingDataTest {
     }
 
     class PotentialEngeryCaculator {
+        private double GRAVITATIONAL_CONSTANT = 9.81;
+
         double potentialEnergy(double mass, double height) {
-            return mass * 9.81 * height;
+            return mass * GRAVITATIONAL_CONSTANT * height;
         }
     }
 }
