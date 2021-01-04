@@ -1,5 +1,6 @@
 package com.example.refactorings;
 
+import com.sun.javafx.collections.UnmodifiableListSet;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
@@ -322,14 +323,18 @@ public class OrganizingDataTest {
     }
 
     class Person {
-        private Set<Course> courses;
+        private Set<Course> courses = new HashSet<>();
 
         public Set<Course> getCourses() {
-            return courses;
+            return Collections.unmodifiableSet(courses);
         }
 
-        public void setCourses(Set<Course> courses) {
-            this.courses = courses;
+        public void addCourse(Course course) {
+            courses.add(course);
+        }
+
+        public void removeCourse(Course course) {
+            courses.remove(course);
         }
     }
 
@@ -337,17 +342,16 @@ public class OrganizingDataTest {
     void course_person_client() {
         final Person kent = new Person();
         final Set<Course> courses = new HashSet<>();
-        courses.add(new Course("Smalltalk Programming", false));
-        courses.add(new Course("Appreciating Single Malts", true));
-        kent.setCourses(courses);
+        kent.addCourse(new Course("Smalltalk Programming", false));
+        kent.addCourse(new Course("Appreciating Single Malts", true));
         assertThat(kent.getCourses().size()).isEqualTo(2);
 
         final Course refactoring = new Course("Refactoring", true);
-        kent.getCourses().add(refactoring);
-        kent.getCourses().add(new Course("Brutal Sarcasm", false));
+        kent.addCourse(refactoring);
+        kent.addCourse(new Course("Brutal Sarcasm", false));
         assertThat(kent.getCourses().size()).isEqualTo(4);
 
-        kent.getCourses().remove(refactoring);
+        kent.removeCourse(refactoring);
         assertThat(kent.getCourses().size()).isEqualTo(3);
 
         long advancedCourceCount = kent.getCourses()
