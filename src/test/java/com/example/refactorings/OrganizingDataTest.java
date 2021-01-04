@@ -296,4 +296,10 @@ public class OrganizingDataTest {
             this.high = high;
         }
     }
+
+    class PotentialEngeryCaculator {
+        double potentialEnergy(double mass, double height) {
+            return mass * 9.81 * height;
+        }
+    }
 }
