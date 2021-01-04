@@ -8,6 +8,8 @@ import java.awt.event.FocusEvent;
 import java.util.List;
 import java.util.*;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 class Customer {
     public List<Customer> lists = new ArrayList<>();
     private Set<Order> orders = new HashSet<>();
@@ -303,5 +305,55 @@ public class OrganizingDataTest {
         double potentialEnergy(double mass, double height) {
             return mass * GRAVITATIONAL_CONSTANT * height;
         }
+    }
+
+    class Course {
+        private final String name;
+        private final boolean isAdvanced;
+
+        Course(String name, boolean isAdvanced) {
+            this.name = name;
+            this.isAdvanced = isAdvanced;
+        }
+
+        public boolean isAdvanced() {
+            return isAdvanced;
+        }
+    }
+
+    class Person {
+        private Set<Course> courses;
+
+        public Set<Course> getCourses() {
+            return courses;
+        }
+
+        public void setCourses(Set<Course> courses) {
+            this.courses = courses;
+        }
+    }
+
+    @Test
+    void course_person_client() {
+        final Person kent = new Person();
+        final Set<Course> courses = new HashSet<>();
+        courses.add(new Course("Smalltalk Programming", false));
+        courses.add(new Course("Appreciating Single Malts", true));
+        kent.setCourses(courses);
+        assertThat(kent.getCourses().size()).isEqualTo(2);
+
+        final Course refactoring = new Course("Refactoring", true);
+        kent.getCourses().add(refactoring);
+        kent.getCourses().add(new Course("Brutal Sarcasm", false));
+        assertThat(kent.getCourses().size()).isEqualTo(4);
+
+        kent.getCourses().remove(refactoring);
+        assertThat(kent.getCourses().size()).isEqualTo(3);
+
+        long advancedCourceCount = kent.getCourses()
+                                       .stream()
+                                       .filter(c -> c.isAdvanced() == true)
+                                       .count();
+        assertThat(advancedCourceCount).isEqualTo(1);
     }
 }
