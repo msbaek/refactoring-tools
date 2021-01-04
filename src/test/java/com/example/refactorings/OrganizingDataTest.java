@@ -1,6 +1,5 @@
 package com.example.refactorings;
 
-import com.sun.javafx.collections.UnmodifiableListSet;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
@@ -336,6 +335,13 @@ public class OrganizingDataTest {
         public void removeCourse(Course course) {
             courses.remove(course);
         }
+
+        private long numberOfAdvancedCourse() {
+            return getCourses()
+                       .stream()
+                       .filter(c -> c.isAdvanced() == true)
+                       .count();
+        }
     }
 
     @Test
@@ -354,14 +360,8 @@ public class OrganizingDataTest {
         kent.removeCourse(refactoring);
         assertThat(kent.getCourses().size()).isEqualTo(3);
 
-        long advancedCourceCount = numberOfAdvancedCourse(kent);
+        long advancedCourceCount = kent.numberOfAdvancedCourse();
         assertThat(advancedCourceCount).isEqualTo(1);
     }
 
-    private long numberOfAdvancedCourse(Person kent) {
-        return kent.getCourses()
-                   .stream()
-                   .filter(c -> c.isAdvanced() == true)
-                   .count();
-    }
 }
