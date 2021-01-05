@@ -364,56 +364,29 @@ public class OrganizingDataTest {
         assertThat(advancedCourceCount).isEqualTo(1);
     }
 
-    abstract class Employee {
+    static class Employee {
         private int type;
         static final int ENGINEER = 0;
         static final int SALESMAN = 1;
         static final int MANAGER = 2;
+        private int monthlySalary;
+        private int commission;
+        private int bonus;
 
-        private Employee() {
-        }
-
-        private Employee(int type) {
-            this.setType(type);
-        }
-
-        public abstract int getType();
-
-        public void setType(int type) {
+        Employee(int type) {
             this.type = type;
         }
 
-        Employee createEmployee(int type) {
+        int payAmount() {
             switch (type) {
                 case ENGINEER:
-                    return new Engineer();
+                    return monthlySalary;
                 case SALESMAN:
-                    return new Salesman();
+                    return monthlySalary + commission;
                 case MANAGER:
-                    return new Manager();
+                    return monthlySalary + bonus;
                 default:
-                    throw new IllegalArgumentException("type: [" + type + "] is not supported");
-            }
-        }
-
-        private class Engineer extends Employee {
-            @Override
-            public int getType() {
-                return ENGINEER;
-            }
-        }
-
-        private class Salesman extends Employee {
-            @Override
-            public int getType() {
-                return SALESMAN;
-            }
-        }
-
-        private class Manager extends Employee {
-            @Override
-            public int getType() {
-                return MANAGER;
+                    throw new RuntimeException("Incorrect Employee");
             }
         }
     }
