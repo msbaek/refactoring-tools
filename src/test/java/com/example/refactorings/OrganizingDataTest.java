@@ -371,6 +371,14 @@ public class OrganizingDataTest {
         static final int MANAGER = 2;
 
         Employee (int type) {
+            this.setType(type);
+        }
+
+        public int getType() {
+            return type;
+        }
+
+        public void setType(int type) {
             this.type = type;
         }
     }
