@@ -399,21 +399,21 @@ public class OrganizingDataTest {
         private class Engineer extends Employee {
             @Override
             public int getType() {
-                return type;
+                return ENGINEER;
             }
         }
 
         private class Salesman extends Employee {
             @Override
             public int getType() {
-                return type;
+                return SALESMAN;
             }
         }
 
         private class Manager extends Employee {
             @Override
             public int getType() {
-                return type;
+                return MANAGER;
             }
         }
     }
