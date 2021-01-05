@@ -455,8 +455,13 @@ public class OrganizingDataTest {
             this.code = code;
         }
 
-        abstract boolean isMale();
-        abstract char getCode();
+        boolean isMale() {
+            return isMale;
+        }
+
+        char getCode() {
+            return code;
+        }
 
         Male createMale() {
             return new Male();
@@ -471,31 +476,11 @@ public class OrganizingDataTest {
         private Male() {
             super(true, 'M');
         }
-
-        @Override
-        boolean isMale() {
-            return true;
-        }
-
-        @Override
-        char getCode() {
-            return 'M';
-        }
     }
 
     class Female extends Individual {
         private Female() {
             super(false, 'F');
-        }
-
-        @Override
-        boolean isMale() {
-            return false;
-        }
-
-        @Override
-        char getCode() {
-            return 'F';
         }
     }
 }
