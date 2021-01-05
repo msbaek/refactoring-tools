@@ -365,6 +365,7 @@ public class OrganizingDataTest {
     }
 
     static class Employee {
+        private final EmployeeType employeeType = new EmployeeType(this);
         private int type;
         static final int ENGINEER = 0;
         static final int SALESMAN = 1;
@@ -374,11 +375,11 @@ public class OrganizingDataTest {
         private int bonus;
 
         Employee(int type) {
-            this.setType(type);
+            employeeType.setType(type);
         }
 
         int payAmount() {
-            switch (getType()) {
+            switch (employeeType.getType()) {
                 case ENGINEER:
                     return monthlySalary;
                 case SALESMAN:
@@ -391,11 +392,27 @@ public class OrganizingDataTest {
         }
 
         public int getType() {
-            return type;
+            return employeeType.getType();
         }
 
         public void setType(int type) {
-            this.type = type;
+            employeeType.setType(type);
+        }
+
+        public static class EmployeeType {
+            private final Employee employee;
+
+            public EmployeeType(Employee employee) {
+                this.employee = employee;
+            }
+
+            public int getType() {
+                return employee.getType();
+            }
+
+            public void setType(int type) {
+                employee.setType(type);
+            }
         }
     }
 }
