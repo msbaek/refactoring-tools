@@ -447,6 +447,14 @@ public class OrganizingDataTest {
     }
 
     abstract class Individual {
+        private final boolean isMale;
+        private final char code;
+
+        protected Individual(boolean isMale, char code) {
+            this.isMale = isMale;
+            this.code = code;
+        }
+
         abstract boolean isMale();
         abstract char getCode();
 
@@ -461,6 +469,7 @@ public class OrganizingDataTest {
 
     class Male extends Individual {
         private Male() {
+            super(true, 'M');
         }
 
         @Override
@@ -476,6 +485,7 @@ public class OrganizingDataTest {
 
     class Female extends Individual {
         private Female() {
+            super(false, 'F');
         }
 
         @Override
