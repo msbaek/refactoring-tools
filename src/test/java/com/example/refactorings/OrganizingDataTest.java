@@ -370,7 +370,7 @@ public class OrganizingDataTest {
         static final int SALESMAN = 1;
         static final int MANAGER = 2;
 
-        Employee (int type) {
+        private Employee(int type) {
             this.setType(type);
         }
 
@@ -380,6 +380,10 @@ public class OrganizingDataTest {
 
         public void setType(int type) {
             this.type = type;
+        }
+
+        Employee createEmployee(int type) {
+            return new Employee(type);
         }
     }
 }
