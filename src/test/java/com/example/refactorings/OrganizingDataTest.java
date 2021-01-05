@@ -370,6 +370,9 @@ public class OrganizingDataTest {
         static final int SALESMAN = 1;
         static final int MANAGER = 2;
 
+        private Employee() {
+        }
+
         private Employee(int type) {
             this.setType(type);
         }
@@ -383,7 +386,16 @@ public class OrganizingDataTest {
         }
 
         Employee createEmployee(int type) {
-            return new Employee(type);
+            switch (type) {
+                case ENGINEER:
+                    return new Engineer();
+                case SALESMAN:
+                    return new Salesman();
+                case MANAGER:
+                    return new Manager();
+                default:
+                    throw new IllegalArgumentException("type: [" + type + "] is not supported");
+            }
         }
     }
 }
