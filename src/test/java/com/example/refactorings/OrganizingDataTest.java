@@ -446,7 +446,7 @@ public class OrganizingDataTest {
         }
     }
 
-    abstract class Individual {
+    class Individual {
         private final boolean isMale;
         private final char code;
 
@@ -463,24 +463,12 @@ public class OrganizingDataTest {
             return code;
         }
 
-        Male createMale() {
-            return new Male();
+        Individual createMale() {
+            return new Individual(true, 'M');
         }
 
-        Female createFemale() {
-            return new Female();
-        }
-    }
-
-    class Male extends Individual {
-        private Male() {
-            super(true, 'M');
-        }
-    }
-
-    class Female extends Individual {
-        private Female() {
-            super(false, 'F');
+        Individual createFemale() {
+            return new Individual(false, 'F');
         }
     }
 }
