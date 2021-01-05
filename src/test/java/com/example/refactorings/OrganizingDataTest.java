@@ -449,9 +449,20 @@ public class OrganizingDataTest {
     abstract class Individual {
         abstract boolean isMale();
         abstract char getCode();
+
+        Male createMale() {
+            return new Male();
+        }
+
+        Female createFemale() {
+            return new Female();
+        }
     }
 
     class Male extends Individual {
+        private Male() {
+        }
+
         @Override
         boolean isMale() {
             return true;
@@ -464,6 +475,9 @@ public class OrganizingDataTest {
     }
 
     class Female extends Individual {
+        private Female() {
+        }
+
         @Override
         boolean isMale() {
             return false;
