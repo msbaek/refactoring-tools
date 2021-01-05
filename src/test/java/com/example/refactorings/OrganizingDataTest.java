@@ -364,7 +364,7 @@ public class OrganizingDataTest {
         assertThat(advancedCourceCount).isEqualTo(1);
     }
 
-    class Employee {
+    abstract class Employee {
         private int type;
         static final int ENGINEER = 0;
         static final int SALESMAN = 1;
@@ -377,9 +377,7 @@ public class OrganizingDataTest {
             this.setType(type);
         }
 
-        public int getType() {
-            return type;
-        }
+        public abstract int getType();
 
         public void setType(int type) {
             this.type = type;
@@ -399,12 +397,24 @@ public class OrganizingDataTest {
         }
 
         private class Engineer extends Employee {
+            @Override
+            public int getType() {
+                return type;
+            }
         }
 
         private class Salesman extends Employee {
+            @Override
+            public int getType() {
+                return type;
+            }
         }
 
         private class Manager extends Employee {
+            @Override
+            public int getType() {
+                return type;
+            }
         }
     }
 }
