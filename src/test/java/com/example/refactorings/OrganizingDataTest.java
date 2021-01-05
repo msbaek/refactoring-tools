@@ -397,5 +397,14 @@ public class OrganizingDataTest {
                     throw new IllegalArgumentException("type: [" + type + "] is not supported");
             }
         }
+
+        private class Engineer extends Employee {
+        }
+
+        private class Salesman extends Employee {
+        }
+
+        private class Manager extends Employee {
+        }
     }
 }
