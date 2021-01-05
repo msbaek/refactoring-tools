@@ -445,4 +445,33 @@ public class OrganizingDataTest {
             }
         }
     }
+
+    abstract class Individual {
+        abstract boolean isMale();
+        abstract char getCode();
+    }
+
+    class Male extends Individual {
+        @Override
+        boolean isMale() {
+            return true;
+        }
+
+        @Override
+        char getCode() {
+            return 'M';
+        }
+    }
+
+    class Female extends Individual {
+        @Override
+        boolean isMale() {
+            return false;
+        }
+
+        @Override
+        char getCode() {
+            return 'F';
+        }
+    }
 }
