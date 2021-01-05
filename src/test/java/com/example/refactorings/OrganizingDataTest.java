@@ -12,7 +12,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class Customer {
     public List<Customer> lists = new ArrayList<>();
-    private Set<Order> orders = new HashSet<>();
+    private final Set<Order> orders = new HashSet<>();
     private String name;
     private static Customer instance;
 
@@ -338,9 +338,9 @@ public class OrganizingDataTest {
 
         private long numberOfAdvancedCourse() {
             return getCourses()
-                       .stream()
-                       .filter(c -> c.isAdvanced() == true)
-                       .count();
+                    .stream()
+                    .filter(c -> c.isAdvanced() == true)
+                    .count();
         }
     }
 
@@ -350,45 +350,32 @@ public class OrganizingDataTest {
         final Set<Course> courses = new HashSet<>();
         kent.addCourse(new Course("Smalltalk Programming", false));
         kent.addCourse(new Course("Appreciating Single Malts", true));
-        assertThat(kent.getCourses().size()).isEqualTo(2);
+        assertThat(kent.getCourses()
+                       .size()).isEqualTo(2);
 
         final Course refactoring = new Course("Refactoring", true);
         kent.addCourse(refactoring);
         kent.addCourse(new Course("Brutal Sarcasm", false));
-        assertThat(kent.getCourses().size()).isEqualTo(4);
+        assertThat(kent.getCourses()
+                       .size()).isEqualTo(4);
 
         kent.removeCourse(refactoring);
-        assertThat(kent.getCourses().size()).isEqualTo(3);
+        assertThat(kent.getCourses()
+                       .size()).isEqualTo(3);
 
         long advancedCourceCount = kent.numberOfAdvancedCourse();
         assertThat(advancedCourceCount).isEqualTo(1);
     }
 
     static class Employee {
-        private final EmployeeType employeeType = new EmployeeType(this);
+        private EmployeeType employeeType;
         private int type;
-        static final int ENGINEER = 0;
-        static final int SALESMAN = 1;
-        static final int MANAGER = 2;
         private int monthlySalary;
         private int commission;
         private int bonus;
 
         Employee(int type) {
-            employeeType.setType(type);
-        }
-
-        int payAmount() {
-            switch (employeeType.getType()) {
-                case ENGINEER:
-                    return monthlySalary;
-                case SALESMAN:
-                    return monthlySalary + commission;
-                case MANAGER:
-                    return monthlySalary + bonus;
-                default:
-                    throw new RuntimeException("Incorrect Employee");
-            }
+            setType(type);
         }
 
         public int getType() {
@@ -396,22 +383,65 @@ public class OrganizingDataTest {
         }
 
         public void setType(int type) {
-            employeeType.setType(type);
+            employeeType = EmployeeType.newType(type);
+        }
+    }
+
+    public abstract static class EmployeeType {
+        static final int ENGINEER = 0;
+        static final int SALESMAN = 1;
+        static final int MANAGER = 2;
+
+        public abstract int getType();
+
+        public static EmployeeType newType(int type) {
+            switch (type) {
+                case ENGINEER:
+                    return new Engineer();
+                case SALESMAN:
+                    return new Salesman();
+                case MANAGER:
+                    return new Manager();
+                default:
+                    throw new IllegalArgumentException("type: [" + type + "] is not supported");
+            }
         }
 
-        public static class EmployeeType {
-            private final Employee employee;
+        abstract int payAmount(Employee employee);
 
-            public EmployeeType(Employee employee) {
-                this.employee = employee;
-            }
-
+        private static class Engineer extends EmployeeType {
+            @Override
             public int getType() {
-                return employee.getType();
+                return ENGINEER;
             }
 
-            public void setType(int type) {
-                employee.setType(type);
+            @Override
+            int payAmount(Employee employee) {
+                return employee.monthlySalary;
+            }
+        }
+
+        private static class Salesman extends EmployeeType {
+            @Override
+            public int getType() {
+                return SALESMAN;
+            }
+
+            @Override
+            int payAmount(Employee employee) {
+                return employee.monthlySalary + employee.commission;
+            }
+        }
+
+        private static class Manager extends EmployeeType {
+            @Override
+            public int getType() {
+                return MANAGER;
+            }
+
+            @Override
+            int payAmount(Employee employee) {
+                return employee.monthlySalary + employee.bonus;
             }
         }
     }
