@@ -374,11 +374,11 @@ public class OrganizingDataTest {
         private int bonus;
 
         Employee(int type) {
-            this.type = type;
+            this.setType(type);
         }
 
         int payAmount() {
-            switch (type) {
+            switch (getType()) {
                 case ENGINEER:
                     return monthlySalary;
                 case SALESMAN:
@@ -388,6 +388,14 @@ public class OrganizingDataTest {
                 default:
                     throw new RuntimeException("Incorrect Employee");
             }
+        }
+
+        public int getType() {
+            return type;
+        }
+
+        public void setType(int type) {
+            this.type = type;
         }
     }
 }
