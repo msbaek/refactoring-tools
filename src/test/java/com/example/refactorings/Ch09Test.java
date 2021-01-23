@@ -36,16 +36,7 @@ public class Ch09Test {
 
         @Override
         protected int payAmount(Employee employee) {
-            switch (employee.getType()) {
-                case ENGINEER:
-                    return employee.monthlySalary;
-                case SALESMAN:
-                    return employee.monthlySalary + employee.commission;
-                case MANAGER:
-                    return employee.monthlySalary + employee.bonus;
-                default:
-                    throw new RuntimeException("Incorrect Employee");
-            }
+            return employee.monthlySalary;
         }
     }
 
@@ -57,16 +48,7 @@ public class Ch09Test {
 
         @Override
         protected int payAmount(Employee employee) {
-            switch (employee.getType()) {
-                case ENGINEER:
-                    return employee.monthlySalary;
-                case SALESMAN:
-                    return employee.monthlySalary + employee.commission;
-                case MANAGER:
-                    return employee.monthlySalary + employee.bonus;
-                default:
-                    throw new RuntimeException("Incorrect Employee");
-            }
+            return employee.monthlySalary + employee.commission;
         }
     }
 
@@ -78,16 +60,7 @@ public class Ch09Test {
 
         @Override
         protected int payAmount(Employee employee) {
-            switch (employee.getType()) {
-                case ENGINEER:
-                    return employee.monthlySalary;
-                case SALESMAN:
-                    return employee.monthlySalary + employee.commission;
-                case MANAGER:
-                    return employee.monthlySalary + employee.bonus;
-                default:
-                    throw new RuntimeException("Incorrect Employee");
-            }
+            return employee.monthlySalary + employee.bonus;
         }
     }
 }
