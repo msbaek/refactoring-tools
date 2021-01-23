@@ -25,7 +25,17 @@ public class Ch09Test {
 
         abstract int getTypeCode();
 
-        private int payAmount(Employee employee) {
+        protected abstract int payAmount(Employee employee);
+    }
+
+    class Engineer extends EmployeeType {
+        @Override
+        int getTypeCode() {
+            return EmployeeType.ENGINEER;
+        }
+
+        @Override
+        protected int payAmount(Employee employee) {
             switch (employee.getType()) {
                 case ENGINEER:
                     return employee.monthlySalary;
@@ -39,17 +49,24 @@ public class Ch09Test {
         }
     }
 
-    class Engineer extends EmployeeType {
-        @Override
-        int getTypeCode() {
-            return EmployeeType.ENGINEER;
-        }
-    }
-
     class Salesman extends EmployeeType {
         @Override
         int getTypeCode() {
             return EmployeeType.SALESMAN;
+        }
+
+        @Override
+        protected int payAmount(Employee employee) {
+            switch (employee.getType()) {
+                case ENGINEER:
+                    return employee.monthlySalary;
+                case SALESMAN:
+                    return employee.monthlySalary + employee.commission;
+                case MANAGER:
+                    return employee.monthlySalary + employee.bonus;
+                default:
+                    throw new RuntimeException("Incorrect Employee");
+            }
         }
     }
 
@@ -57,6 +74,20 @@ public class Ch09Test {
         @Override
         int getTypeCode() {
             return EmployeeType.SALESMAN;
+        }
+
+        @Override
+        protected int payAmount(Employee employee) {
+            switch (employee.getType()) {
+                case ENGINEER:
+                    return employee.monthlySalary;
+                case SALESMAN:
+                    return employee.monthlySalary + employee.commission;
+                case MANAGER:
+                    return employee.monthlySalary + employee.bonus;
+                default:
+                    throw new RuntimeException("Incorrect Employee");
+            }
         }
     }
 }
