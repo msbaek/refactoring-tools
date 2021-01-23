@@ -7,20 +7,7 @@ public class Ch09Test {
         private int bonus;
 
         int payAmount() {
-            return payAmount1();
-        }
-
-        private int payAmount1() {
-            switch (getType()) {
-                case EmployeeType.ENGINEER:
-                    return monthlySalary;
-                case EmployeeType.SALESMAN:
-                    return monthlySalary + commission;
-                case EmployeeType.MANAGER:
-                    return monthlySalary + bonus;
-                default:
-                    throw new RuntimeException("Incorrect Employee");
-            }
+            return type.payAmount(this);
         }
 
         private int getType() {
@@ -37,6 +24,19 @@ public class Ch09Test {
         public static final int MANAGER = 3;
 
         abstract int getTypeCode();
+
+        private int payAmount(Employee employee) {
+            switch (employee.getType()) {
+                case ENGINEER:
+                    return employee.monthlySalary;
+                case SALESMAN:
+                    return employee.monthlySalary + employee.commission;
+                case MANAGER:
+                    return employee.monthlySalary + employee.bonus;
+                default:
+                    throw new RuntimeException("Incorrect Employee");
+            }
+        }
     }
 
     class Engineer extends EmployeeType {
