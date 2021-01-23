@@ -7,6 +7,10 @@ public class Ch09Test {
         private int bonus;
 
         int payAmount() {
+            return payAmount1();
+        }
+
+        private int payAmount1() {
             switch (getType()) {
                 case EmployeeType.ENGINEER:
                     return monthlySalary;
