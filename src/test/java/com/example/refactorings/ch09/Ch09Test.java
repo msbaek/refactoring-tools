@@ -1,4 +1,6 @@
-package com.example.refactorings;
+package com.example.refactorings.ch09;
+
+import org.junit.jupiter.api.Test;
 
 public class Ch09Test {
     class Employee {
@@ -62,5 +64,51 @@ public class Ch09Test {
         protected int payAmount(Employee employee) {
             return employee.monthlySalary + employee.bonus;
         }
+    }
+
+    class Site {
+        Customer getCustomer() {
+            return customer;
+        }
+
+        Customer customer;
+    }
+
+    static class BillingPlan {
+
+        public static BillingPlan basic() {
+            throw new UnsupportedOperationException();
+        }
+    }
+
+    class Customer {
+        public BillingPlan getPlan() {
+            throw new UnsupportedOperationException();
+        }
+
+        public String getName() {
+            throw new UnsupportedOperationException();
+        }
+
+        public int getWeeksDelinquentInLastYear() {
+            throw new UnsupportedOperationException();
+        }
+    }
+
+    @Test
+    void nullObjectClientTest() {
+        Site site = new Site();
+        final Customer customer = site.getCustomer();
+        BillingPlan plan;
+        if(customer == null) plan = BillingPlan.basic();
+        else plan = customer.getPlan();
+
+        String customerName;
+        if(customer == null) customerName = "occupant";
+        else customerName = customer.getName();
+
+        int weekDelinquent;
+        if(customer == null) weekDelinquent = 0;
+        else weekDelinquent = customer.getWeeksDelinquentInLastYear();
     }
 }
