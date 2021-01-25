@@ -1,6 +1,7 @@
 package com.example.refactorings.ch09;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.util.Assert;
 
 public class Ch09Test {
     class Employee {
@@ -148,8 +149,10 @@ public class Ch09Test {
         private Project _primaryProject;
 
         double getExpenseLimit() {
+            Assert.isTrue(_expenseLimit != NULL_EXPENSE || _primaryProject != null,
+                    "should have either expense limit or a primary project");
             return (_expenseLimit != NULL_EXPENSE) ?
-                    _expenseLimit :
+                    _expenseLimit:
                     _primaryProject.getMemberExpenseLimit();
         }
 
