@@ -108,22 +108,31 @@ public class Ch09Test {
         public boolean isNull() {
             return true;
         }
+
+        @Override
+        public BillingPlan getPlan() {
+            return BillingPlan.basic();
+        }
+
+        @Override
+        public String getName() {
+            return "occupant";
+        }
+
+        @Override
+        public int getWeeksDelinquentInLastYear() {
+            return 0;
+        }
     }
 
     @Test
     void nullObjectClientTest() {
         Site site = new Site();
         final Customer customer = site.getCustomer();
-        BillingPlan plan;
-        if(customer.isNull()) plan = BillingPlan.basic();
-        else plan = customer.getPlan();
+        BillingPlan plan = customer.getPlan();
 
-        String customerName;
-        if(customer.isNull()) customerName = "occupant";
-        else customerName = customer.getName();
+        String customerName = customer.getName();
 
-        int weekDelinquent;
-        if(customer.isNull()) weekDelinquent = 0;
-        else weekDelinquent = customer.getWeeksDelinquentInLastYear();
+        int weekDelinquent = customer.getWeeksDelinquentInLastYear();
     }
 }
