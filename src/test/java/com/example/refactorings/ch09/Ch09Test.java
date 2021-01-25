@@ -93,6 +93,17 @@ public class Ch09Test {
         public int getWeeksDelinquentInLastYear() {
             throw new UnsupportedOperationException();
         }
+
+        public boolean isNull() {
+            return false;
+        }
+    }
+
+    class NullCustomer extends Customer {
+        @Override
+        public boolean isNull() {
+            return true;
+        }
     }
 
     @Test
