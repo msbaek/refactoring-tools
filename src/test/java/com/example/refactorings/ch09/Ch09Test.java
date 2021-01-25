@@ -68,7 +68,7 @@ public class Ch09Test {
 
     class Site {
         Customer getCustomer() {
-            return customer;
+            return customer == null ? Customer.newNull() : customer;
         }
 
         Customer customer;
@@ -115,15 +115,15 @@ public class Ch09Test {
         Site site = new Site();
         final Customer customer = site.getCustomer();
         BillingPlan plan;
-        if(customer == null) plan = BillingPlan.basic();
+        if(customer.isNull()) plan = BillingPlan.basic();
         else plan = customer.getPlan();
 
         String customerName;
-        if(customer == null) customerName = "occupant";
+        if(customer.isNull()) customerName = "occupant";
         else customerName = customer.getName();
 
         int weekDelinquent;
-        if(customer == null) weekDelinquent = 0;
+        if(customer.isNull()) weekDelinquent = 0;
         else weekDelinquent = customer.getWeeksDelinquentInLastYear();
     }
 }
