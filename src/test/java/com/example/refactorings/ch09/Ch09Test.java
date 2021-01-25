@@ -81,7 +81,7 @@ public class Ch09Test {
         }
     }
 
-    class Customer {
+    static class Customer {
         public BillingPlan getPlan() {
             throw new UnsupportedOperationException();
         }
@@ -97,9 +97,13 @@ public class Ch09Test {
         public boolean isNull() {
             return false;
         }
+
+        public static Customer newNull() {
+            return new NullCustomer();
+        }
     }
 
-    class NullCustomer extends Customer {
+    static class NullCustomer extends Customer {
         @Override
         public boolean isNull() {
             return true;
