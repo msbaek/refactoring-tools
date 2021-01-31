@@ -9,18 +9,17 @@ public class Ch10Test {
         throw new UnsupportedOperationException();
     }
 
-    String foundMiscreant(String[] people){
+    void foundMiscreant(String[] people){
         for (int i = 0; i < people.length; i++) {
             if (people[i].equals ("Don")){
                 sendAlert();
-                return foundPersion(people);
+                return;
             }
             if (people[i].equals ("John")){
                 sendAlert();
-                return foundPersion(people);
+                return;
             }
         }
-        return foundPersion(people);
     }
 
     String foundPersion(String[] people){
