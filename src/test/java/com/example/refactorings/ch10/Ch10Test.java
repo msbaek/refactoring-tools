@@ -36,7 +36,8 @@ public class Ch10Test {
     }
 
     void checkSecurity(String[] people) {
-        String found = foundMiscreant(people);
+        foundMiscreant(people);
+        String found = foundPersion(people);
         someLaterCode(found);
     }
 }
