@@ -44,13 +44,10 @@ public class Ch10Test {
                 salary *= factor;
             }
 
-            void fivePercentRaise() {
-                tenPercentRaise(1.05);
-            }
         }
 
         final Employee e = new Employee();
         e.tenPercentRaise(1.1);
-        e.fivePercentRaise();
+        e.tenPercentRaise(1.05);
     }
 }
