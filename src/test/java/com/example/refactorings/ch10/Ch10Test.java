@@ -59,6 +59,18 @@ public class Ch10Test {
             }
         }
 
+        static Employee createEngineer() {
+            return new Engineer();
+        }
+
+        static Employee createSalesman() {
+            return new Salesman();
+        }
+
+        static Employee createManager() {
+            return new Manager();
+        }
+
         private static class Engineer extends Employee {
         }
 
