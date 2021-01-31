@@ -49,11 +49,11 @@ public class Ch10Test {
         static Employee create(int type) {
             switch (type) {
                 case ENGINEER:
-                    return new Engineer();
+                    return Employee.createEngineer();
                 case SALESMAN:
-                    return new Salesman();
+                    return Employee.createSalesman();
                 case MANAGER:
-                    return new Manager();
+                    return Employee.createManager();
                 default:
                     throw new IllegalArgumentException("Incorrect type code value");
             }
@@ -79,6 +79,13 @@ public class Ch10Test {
 
         private static class Manager extends Employee {
         }
+    }
+
+    @Test
+    void replaceParameterWithExplicitMethods() {
+        Employee kent = Employee.create(ENGINEER);
+        Employee beck = Employee.create(SALESMAN);
+        Employee bob = Employee.create(MANAGER);
     }
 
     @Test
