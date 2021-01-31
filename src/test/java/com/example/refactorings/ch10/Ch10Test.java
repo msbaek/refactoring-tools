@@ -13,14 +13,14 @@ public class Ch10Test {
         for (int i = 0; i < people.length; i++) {
             if (people[i].equals ("Don")){
                 sendAlert();
-                return "Don";
+                return foundPersion(people);
             }
             if (people[i].equals ("John")){
                 sendAlert();
-                return "John";
+                return foundPersion(people);
             }
         }
-        return "";
+        return foundPersion(people);
     }
 
     String foundPersion(String[] people){
