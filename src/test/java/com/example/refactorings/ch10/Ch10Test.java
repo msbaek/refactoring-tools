@@ -46,19 +46,6 @@ public class Ch10Test {
             salary *= factor;
         }
 
-        static Employee create(int type) {
-            switch (type) {
-                case ENGINEER:
-                    return Employee.createEngineer();
-                case SALESMAN:
-                    return Employee.createSalesman();
-                case MANAGER:
-                    return Employee.createManager();
-                default:
-                    throw new IllegalArgumentException("Incorrect type code value");
-            }
-        }
-
         static Employee createEngineer() {
             return new Engineer();
         }
