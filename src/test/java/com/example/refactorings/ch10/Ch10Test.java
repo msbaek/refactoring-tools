@@ -23,6 +23,18 @@ public class Ch10Test {
         return "";
     }
 
+    String foundPersion(String[] people){
+        for (int i = 0; i < people.length; i++) {
+            if (people[i].equals ("Don")){
+                return "Don";
+            }
+            if (people[i].equals ("John")){
+                return "John";
+            }
+        }
+        return "";
+    }
+
     void checkSecurity(String[] people) {
         String found = foundMiscreant(people);
         someLaterCode(found);
