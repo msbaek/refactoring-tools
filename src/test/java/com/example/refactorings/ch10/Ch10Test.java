@@ -40,17 +40,17 @@ public class Ch10Test {
         class Employee {
             private double salary;
 
-            void tenPercentRaise() {
-                salary *= 1.1;
+            void tenPercentRaise(double factor) {
+                salary *= factor;
             }
 
             void fivePercentRaise() {
-                salary *= 1.05;
+                tenPercentRaise(1.05);
             }
         }
 
         final Employee e = new Employee();
-        e.tenPercentRaise();
+        e.tenPercentRaise(1.1);
         e.fivePercentRaise();
     }
 }
