@@ -10,16 +10,9 @@ public class Ch10Test {
     }
 
     void sendAlert(String[] people){
-        for (int i = 0; i < people.length; i++) {
-            if (people[i].equals ("Don")){
-                sendAlert();
-                return;
-            }
-            if (people[i].equals ("John")){
-                sendAlert();
-                return;
-            }
-        }
+        if(foundPersion(people).equals(""))
+            return;
+        sendAlert();
     }
 
     String foundPersion(String[] people){
