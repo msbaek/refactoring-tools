@@ -9,7 +9,7 @@ public class Ch10Test {
         throw new UnsupportedOperationException();
     }
 
-    void foundMiscreant(String[] people){
+    void sendAlert(String[] people){
         for (int i = 0; i < people.length; i++) {
             if (people[i].equals ("Don")){
                 sendAlert();
@@ -35,7 +35,7 @@ public class Ch10Test {
     }
 
     void checkSecurity(String[] people) {
-        foundMiscreant(people);
+        sendAlert(people);
         String found = foundPersion(people);
         someLaterCode(found);
     }
