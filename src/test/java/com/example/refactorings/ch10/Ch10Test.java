@@ -35,17 +35,42 @@ public class Ch10Test {
         someLaterCode(found);
     }
 
-    @Test
-    void parameterizedMethod() {
-        class Employee {
-            private double salary;
+    static final int ENGINEER = 0;
+    static final int SALESMAN = 1;
+    static final int MANAGER = 2;
 
-            void tenPercentRaise(double factor) {
-                salary *= factor;
-            }
+    static class Employee {
+        private double salary;
 
+        void tenPercentRaise(double factor) {
+            salary *= factor;
         }
 
+        static Employee create(int type) {
+            switch (type) {
+                case ENGINEER:
+                    return new Engineer();
+                case SALESMAN:
+                    return new Salesman();
+                case MANAGER:
+                    return new Manager();
+                default:
+                    throw new IllegalArgumentException("Incorrect type code value");
+            }
+        }
+
+        private static class Engineer extends Employee {
+        }
+
+        private static class Salesman extends Employee {
+        }
+
+        private static class Manager extends Employee {
+        }
+    }
+
+    @Test
+    void parameterizedMethod() {
         final Employee e = new Employee();
         e.tenPercentRaise(1.1);
         e.tenPercentRaise(1.05);
