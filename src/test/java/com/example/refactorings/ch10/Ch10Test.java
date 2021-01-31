@@ -83,9 +83,9 @@ public class Ch10Test {
 
     @Test
     void replaceParameterWithExplicitMethods() {
-        Employee kent = Employee.create(ENGINEER);
-        Employee beck = Employee.create(SALESMAN);
-        Employee bob = Employee.create(MANAGER);
+        Employee kent = Employee.createEngineer();
+        Employee beck = Employee.createSalesman();
+        Employee bob = Employee.createManager();
     }
 
     @Test
