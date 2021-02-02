@@ -159,17 +159,21 @@ public class Ch10Test {
         double getFlowBetween(DateRange dateRange) {
             double result = 0;
             for (Entry each : entries) {
-                if (each.getDate()
-                        .equals(dateRange.getStart()) ||
-                        each.getDate()
-                            .equals(dateRange.getEnd()) ||
-                        (each.getDate()
-                             .after(dateRange.getStart()) && each.getDate()
-                                                                 .before(dateRange.getEnd()))) {
+                if (includes(dateRange, each)) {
                     result += each.getValue();
                 }
             }
             return result;
+        }
+
+        private boolean includes(DateRange dateRange, Entry each) {
+            return each.getDate()
+                       .equals(dateRange.getStart()) ||
+                    each.getDate()
+                        .equals(dateRange.getEnd()) ||
+                    (each.getDate()
+                         .after(dateRange.getStart()) && each.getDate()
+                                                             .before(dateRange.getEnd()));
         }
     }
 
