@@ -20,12 +20,9 @@ public class DateRange {
     }
 
     boolean includes(Ch10Test.Entry each) {
-        return each.getDate()
-                   .equals(getStart()) ||
-                each.getDate()
-                    .equals(getEnd()) ||
-                (each.getDate()
-                     .after(getStart()) && each.getDate()
-                                               .before(getEnd()));
+        final Date date = each.getDate();
+        return date.equals(getStart()) ||
+                date.equals(getEnd()) ||
+                (date.after(getStart()) && date.before(getEnd()));
     }
 }
