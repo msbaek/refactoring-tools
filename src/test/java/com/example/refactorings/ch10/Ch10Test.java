@@ -1,6 +1,5 @@
 package com.example.refactorings.ch10;
 
-import jdk.nashorn.internal.ir.Splittable;
 import org.junit.jupiter.api.Test;
 
 public class Ch10Test {
@@ -101,13 +100,13 @@ public class Ch10Test {
         boolean withinPlan(HeatingPlan plan) {
             int low = daysTempRange().getLow();
             int high = daysTempRange().getHigh();
-            return plan.withinRange(low, high);
+            return plan.withinRange(low, high, daysTempRange());
         }
     }
 
     class HeatingPlan {
-        boolean withinRange(int low, int high) {
-            return (roomRange.Low() >= _range.getLow()
+        boolean withinRange(int low, int high, TempRange roomRange) {
+            return (roomRange.getLow() >= _range.getLow()
                     && high <= _range.getHigh());
         }
 
