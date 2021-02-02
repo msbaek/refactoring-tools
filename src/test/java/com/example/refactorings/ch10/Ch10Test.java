@@ -156,20 +156,20 @@ public class Ch10Test {
 
     class Account {
         private List<Entry> entries = new ArrayList();
-        double getFlowBetween(Date start, Date end) {
+        double getFlowBetween(DateRange dateRange) {
             double result = 0;
             for (Entry each : entries) {
                 if (each.getDate()
-                        .equals(start) ||
+                        .equals(dateRange.getStart()) ||
                         each.getDate()
-                            .equals(end) ||
+                            .equals(dateRange.getEnd()) ||
                         (each.getDate()
-                             .after(start) && each.getDate()
-                                                  .before(end))) {
+                             .after(dateRange.getStart()) && each.getDate()
+                                                                 .before(dateRange.getEnd()))) {
                     result += each.getValue();
                 }
-                return result;
             }
+            return result;
         }
     }
 
@@ -178,6 +178,6 @@ public class Ch10Test {
         Date startDate = null;
         Date endDate = null;
         Account anAccount = new Account();
-        double flow = anAccount.getFlowBetween(startDate, endDate);
+        double flow = anAccount.getFlowBetween(new DateRange(startDate, endDate));
     }
 }
