@@ -19,8 +19,7 @@ public class DateRange {
         return end;
     }
 
-    boolean includes(Ch10Test.Entry each) {
-        final Date date = each.getDate();
+    boolean includes(Date date) {
         return date.equals(getStart()) ||
                 date.equals(getEnd()) ||
                 (date.after(getStart()) && date.before(getEnd()));

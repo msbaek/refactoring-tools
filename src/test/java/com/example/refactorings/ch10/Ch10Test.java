@@ -159,7 +159,7 @@ public class Ch10Test {
         double getFlowBetween(DateRange dateRange) {
             double result = 0;
             for (Entry each : entries) {
-                if (dateRange.includes(each)) {
+                if (dateRange.includes(each.getDate())) {
                     result += each.getValue();
                 }
             }
