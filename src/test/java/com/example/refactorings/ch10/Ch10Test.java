@@ -1,5 +1,6 @@
 package com.example.refactorings.ch10;
 
+import jdk.nashorn.internal.ir.Splittable;
 import org.junit.jupiter.api.Test;
 
 public class Ch10Test {
@@ -80,5 +81,36 @@ public class Ch10Test {
         final Employee e = new Employee();
         e.tenPercentRaise(1.1);
         e.tenPercentRaise(1.05);
+    }
+
+    class TempRange {
+        public int getLow() {
+            throw new UnsupportedOperationException();
+        }
+
+        public int getHigh() {
+            throw new UnsupportedOperationException();
+        }
+    }
+
+    class Room {
+        private TempRange daysTempRange() {
+            throw new UnsupportedOperationException();
+        }
+
+        boolean withinPlan(HeatingPlan plan) {
+            int low = daysTempRange().getLow();
+            int high = daysTempRange().getHigh();
+            return plan.withinRange(low, high);
+        }
+    }
+
+    class HeatingPlan {
+        boolean withinRange(int low, int high) {
+            return (low >= _range.getLow()
+                    && high <= _range.getHigh());
+        }
+
+        private TempRange _range;
     }
 }
