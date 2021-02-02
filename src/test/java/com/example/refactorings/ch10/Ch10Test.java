@@ -107,7 +107,7 @@ public class Ch10Test {
 
     class HeatingPlan {
         boolean withinRange(int low, int high) {
-            return (low >= _range.getLow()
+            return (roomRange.Low() >= _range.getLow()
                     && high <= _range.getHigh());
         }
 
