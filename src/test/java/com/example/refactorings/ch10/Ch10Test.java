@@ -116,7 +116,6 @@ public class Ch10Test {
 
     public double getPrice() {
         int basePrice = quantity * itemPrice;
-        int discountLevel = getDiscountLevel();
         double finalPrice = discountedPrice (basePrice);
         return finalPrice;
     }
