@@ -100,12 +100,12 @@ public class Ch10Test {
         boolean withinPlan(HeatingPlan plan) {
             int low = daysTempRange().getLow();
             int high = daysTempRange().getHigh();
-            return plan.withinRange(low, high, daysTempRange());
+            return plan.withinRange(daysTempRange());
         }
     }
 
     class HeatingPlan {
-        boolean withinRange(int low, int high, TempRange roomRange) {
+        boolean withinRange(TempRange roomRange) {
             return (roomRange.getLow() >= _range.getLow()
                     && roomRange.getHigh() <= _range.getHigh());
         }
