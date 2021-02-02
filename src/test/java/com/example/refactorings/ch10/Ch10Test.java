@@ -2,6 +2,10 @@ package com.example.refactorings.ch10;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 public class Ch10Test {
     private int quantity;
     private int itemPrice;
@@ -130,5 +134,50 @@ public class Ch10Test {
         if (getDiscountLevel() == 2)
             return getBasePrice() * 0.1;
         return getBasePrice() * 0.05;
+    }
+
+    class Entry {
+        Entry(double value, Date chargeDate) {
+            value = value;
+            chargeDate = chargeDate;
+        }
+
+        Date getDate() {
+            return chargeDate;
+        }
+
+        double getValue() {
+            return value;
+        }
+
+        private Date chargeDate;
+        private double value;
+    }
+
+    class Account {
+        private List<Entry> entries = new ArrayList();
+        double getFlowBetween(Date start, Date end) {
+            double result = 0;
+            for (Entry each : entries) {
+                if (each.getDate()
+                        .equals(start) ||
+                        each.getDate()
+                            .equals(end) ||
+                        (each.getDate()
+                             .after(start) && each.getDate()
+                                                  .before(end))) {
+                    result += each.getValue();
+                }
+                return result;
+            }
+        }
+    }
+
+    @Test
+    void introduceParameterObjectClient() {
+        Date startDate = null;
+        Date endDate = null;
+        Account anAccount = new Account();
+        double flow = anAccount.getFlowBetween(startDate, endDate);
     }
 }
