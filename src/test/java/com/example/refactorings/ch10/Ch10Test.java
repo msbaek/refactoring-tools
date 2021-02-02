@@ -117,7 +117,7 @@ public class Ch10Test {
     public double getPrice() {
         int basePrice = quantity * itemPrice;
         int discountLevel = getDiscountLevel();
-        double finalPrice = discountedPrice (basePrice, discountLevel);
+        double finalPrice = discountedPrice (basePrice);
         return finalPrice;
     }
 
@@ -130,7 +130,7 @@ public class Ch10Test {
         return discountLevel;
     }
 
-    private double discountedPrice (int basePrice, int discountLevel) {
+    private double discountedPrice(int basePrice) {
         if (getDiscountLevel() == 2)
             return basePrice * 0.1;
         else
