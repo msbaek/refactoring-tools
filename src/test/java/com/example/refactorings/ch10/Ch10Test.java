@@ -115,24 +115,20 @@ public class Ch10Test {
     }
 
     public double getPrice() {
-        int basePrice = quantity * itemPrice;
-        double finalPrice = discountedPrice (basePrice);
-        return finalPrice;
+        return discountedPrice();
+    }
+
+    private int getBasePrice() {
+        return quantity * itemPrice;
     }
 
     private int getDiscountLevel() {
-        int discountLevel;
-        if (quantity > 100)
-            discountLevel = 2;
-        else
-            discountLevel = 1;
-        return discountLevel;
+        return quantity > 100 ? 2 : 1;
     }
 
-    private double discountedPrice(int basePrice) {
+    private double discountedPrice() {
         if (getDiscountLevel() == 2)
-            return basePrice * 0.1;
-        else
-            return basePrice * 0.05;
+            return getBasePrice() * 0.1;
+        return getBasePrice() * 0.05;
     }
 }
