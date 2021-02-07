@@ -2,9 +2,7 @@ package com.example.refactorings.ch10;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class Ch10Test {
     private int quantity;
@@ -151,5 +149,21 @@ public class Ch10Test {
         Date endDate = null;
         Account anAccount = new Account();
         double flow = anAccount.getFlowBetween(new DateRange(startDate, endDate));
+    }
+
+    class Reading {
+        private Collection readings;
+
+        public Object getLastReading(Reading reading) {
+            return readings.stream()
+                           .reduce((first, second) -> second)
+                           .orElse(null);
+        }
+    }
+
+    @Test
+    void encapsulateDowncast() {
+        final Reading reading = new Reading();
+        Reading lastReading = (Reading) reading.getLastReading(reading);
     }
 }
