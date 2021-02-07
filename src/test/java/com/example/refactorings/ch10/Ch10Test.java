@@ -51,16 +51,20 @@ public class Ch10Test {
         private int type;
         private double salary;
 
-        Employee(int type) {
+        private Employee(int type) {
             this.type = type;
+        }
+
+        static Employee createEmployee(int type) {
+            return new Employee(type);
         }
     }
 
     @Test
     void replaceConstructorWithFactoryMethod() {
-        final Employee engineer = new Employee(Employee.ENGINEER);
-        final Employee manager = new Employee(Employee.MANAGER);
-        final Employee salesman = new Employee(Employee.SALESMAN);
+        final Employee engineer = Employee.createEmployee(Employee.ENGINEER);
+        final Employee manager = Employee.createEmployee(Employee.MANAGER);
+        final Employee salesman = Employee.createEmployee(Employee.SALESMAN);
     }
 
     class TempRange {
