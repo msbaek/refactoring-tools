@@ -42,51 +42,25 @@ public class Ch10Test {
         someLaterCode(found);
     }
 
-    static final int ENGINEER = 0;
-    static final int SALESMAN = 1;
-    static final int MANAGER = 2;
 
     static class Employee {
+        private static final int ENGINEER = 0;
+        private static final int SALESMAN = 1;
+        private static final int MANAGER = 2;
+
+        private int type;
         private double salary;
 
-        void tenPercentRaise(double factor) {
-            salary *= factor;
-        }
-
-        static Employee createEngineer() {
-            return new Engineer();
-        }
-
-        static Employee createSalesman() {
-            return new Salesman();
-        }
-
-        static Employee createManager() {
-            return new Manager();
-        }
-
-        private static class Engineer extends Employee {
-        }
-
-        private static class Salesman extends Employee {
-        }
-
-        private static class Manager extends Employee {
+        Employee(int type) {
+            this.type = type;
         }
     }
 
     @Test
-    void replaceParameterWithExplicitMethods() {
-        Employee kent = Employee.createEngineer();
-        Employee beck = Employee.createSalesman();
-        Employee bob = Employee.createManager();
-    }
-
-    @Test
-    void parameterizedMethod() {
-        final Employee e = new Employee();
-        e.tenPercentRaise(1.1);
-        e.tenPercentRaise(1.05);
+    void replaceConstructorWithFactoryMethod() {
+        final Employee engineer = new Employee(Employee.ENGINEER);
+        final Employee manager = new Employee(Employee.MANAGER);
+        final Employee salesman = new Employee(Employee.SALESMAN);
     }
 
     class TempRange {
@@ -165,7 +139,6 @@ public class Ch10Test {
             }
             return result;
         }
-
     }
 
     @Test
