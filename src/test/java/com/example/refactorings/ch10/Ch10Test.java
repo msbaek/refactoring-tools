@@ -141,6 +141,10 @@ public class Ch10Test {
                 return 0;
             }
         }
+
+        public boolean canWdraw(int amount) {
+            throw new UnsupportedOperationException();
+        }
     }
 
     @Test
@@ -148,10 +152,12 @@ public class Ch10Test {
         Account account = new Account();
         int amount = 100;
 
-        if (account.withdraw(amount) == -1)
+        if (!account.canWdraw(amount))
             handleOverdrawn();
-        else
+        else {
+            account.withdraw(amount);
             doTheUsualThing();
+        }
     }
 
     private void doTheUsualThing() {
