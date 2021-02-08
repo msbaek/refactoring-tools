@@ -158,7 +158,8 @@ public class Ch10Test {
         }
     }
 
-    class BalanceException extends Exception {}
+    class BalanceException extends Exception {
+    }
 
 
     private void doTheUsualThing() {
@@ -183,5 +184,27 @@ public class Ch10Test {
     void encapsulateDowncast() {
         final Reading reading = new Reading();
         Reading lastReading = reading.getLastReading(reading);
+    }
+
+    class ResourcePool {
+        Stack available;
+        Stack allocated;
+
+        Resource getResource() {
+            Resource result;
+            try {
+                result = (Resource) available.pop();
+                allocated.push(result);
+                return result;
+            } catch (EmptyStackException e) {
+                result = new Resource();
+                allocated.push(result);
+                return result;
+            }
+        }
+    }
+
+
+    class Resource {
     }
 }
