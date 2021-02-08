@@ -135,11 +135,11 @@ public class Ch10Test {
         private int balance;
 
         int withdraw(int amount) {
-            if (amount > balance)
-                return -1;
-            else {
-                balance -= amount;
+            try {
+                newWithdraw(amount);
                 return 0;
+            } catch (BalanceException e) {
+                return -1;
             }
         }
 
