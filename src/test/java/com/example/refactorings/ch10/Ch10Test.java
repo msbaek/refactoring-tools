@@ -134,11 +134,13 @@ public class Ch10Test {
     class Account {
         private int balance;
 
-        void withdraw(int amount) throws BalanceException {
+        int withdraw(int amount) {
             if (amount > balance)
-                throw new BalanceException();
-
-            balance -= amount;
+                return -1;
+            else {
+                balance -= amount;
+                return 0;
+            }
         }
 
         public boolean canWdraw(int amount) {
@@ -151,12 +153,11 @@ public class Ch10Test {
         Account account = new Account();
         int amount = 100;
 
-        try {
-            account.withdraw(amount);
-            doTheUsualThing();
-        }
-        catch (BalanceException e) {
+        if(account.withdraw(amount) == -1) {
             handleOverdrawn();
+        }
+        else {
+            doTheUsualThing();
         }
     }
 
