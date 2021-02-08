@@ -154,16 +154,16 @@ public class Ch10Test {
     class Reading {
         private Collection readings;
 
-        public Object getLastReading(Reading reading) {
-            return readings.stream()
-                           .reduce((first, second) -> second)
-                           .orElse(null);
+        public Reading getLastReading(Reading reading) {
+            return (Reading) readings.stream()
+                                     .reduce((first, second) -> second)
+                                     .orElse(null);
         }
     }
 
     @Test
     void encapsulateDowncast() {
         final Reading reading = new Reading();
-        Reading lastReading = (Reading) reading.getLastReading(reading);
+        Reading lastReading = reading.getLastReading(reading);
     }
 }
