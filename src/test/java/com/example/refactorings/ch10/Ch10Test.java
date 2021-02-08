@@ -134,9 +134,9 @@ public class Ch10Test {
     class Account {
         private int balance;
 
-        void withdraw(int amount) {
+        void withdraw(int amount) throws BalanceException {
             if (amount > balance)
-                Assert.isTrue(amount <= balance, "sufficient funds");
+                throw new BalanceException();
 
             balance -= amount;
         }
