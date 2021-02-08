@@ -143,6 +143,13 @@ public class Ch10Test {
             }
         }
 
+        void newWithdraw(int amount) throws BalanceException {
+            if (amount > balance)
+                throw new BalanceException();
+
+            balance -= amount;
+        }
+
         public boolean canWdraw(int amount) {
             throw new UnsupportedOperationException();
         }
