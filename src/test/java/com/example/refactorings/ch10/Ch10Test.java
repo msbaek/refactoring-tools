@@ -192,14 +192,21 @@ public class Ch10Test {
 
         Resource getResource() {
             Resource result;
-            try {
-                result = (Resource) available.pop();
-                allocated.push(result);
-                return result;
-            } catch (EmptyStackException e) {
+            if (available.isEmpty()) {
                 result = new Resource();
                 allocated.push(result);
                 return result;
+            }
+            else {
+                try {
+                    result = (Resource) available.pop();
+                    allocated.push(result);
+                    return result;
+                } catch (EmptyStackException e) {
+                    result = new Resource();
+                    allocated.push(result);
+                    return result;
+                }
             }
         }
     }
