@@ -1,7 +1,6 @@
 package com.example.refactorings.ch10;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.util.Assert;
 
 import java.util.*;
 
@@ -134,7 +133,7 @@ public class Ch10Test {
     class Account {
         private int balance;
 
-        void newWithdraw(int amount) throws BalanceException {
+        void withdraw(int amount) throws BalanceException {
             if (amount > balance)
                 throw new BalanceException();
 
@@ -152,7 +151,7 @@ public class Ch10Test {
         int amount = 100;
 
         try {
-            account.newWithdraw(amount);
+            account.withdraw(amount);
             doTheUsualThing();
         } catch (BalanceException e) {
             handleOverdrawn();
