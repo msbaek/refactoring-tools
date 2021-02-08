@@ -131,24 +131,35 @@ public class Ch10Test {
     }
 
     class Account {
-        private List<Entry> entries = new ArrayList();
-        double getFlowBetween(DateRange dateRange) {
-            double result = 0;
-            for (Entry each : entries) {
-                if (dateRange.includes(each.getDate())) {
-                    result += each.getValue();
-                }
+        private int balance;
+
+        int withdraw(int amount) {
+            if (amount > balance)
+                return -1;
+            else {
+                balance -= amount;
+                return 0;
             }
-            return result;
         }
     }
 
     @Test
-    void introduceParameterObjectClient() {
-        Date startDate = null;
-        Date endDate = null;
-        Account anAccount = new Account();
-        double flow = anAccount.getFlowBetween(new DateRange(startDate, endDate));
+    void uncheckedException() {
+        Account account = new Account();
+        int amount = 100;
+
+        if (account.withdraw(amount) == -1)
+            handleOverdrawn();
+        else
+            doTheUsualThing();
+    }
+
+    private void doTheUsualThing() {
+        throw new UnsupportedOperationException();
+    }
+
+    private void handleOverdrawn() {
+        throw new UnsupportedOperationException();
     }
 
     class Reading {
