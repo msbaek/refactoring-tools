@@ -1,6 +1,7 @@
 package com.example.refactorings.ch10;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.util.Assert;
 
 import java.util.*;
 
@@ -203,6 +204,7 @@ public class Ch10Test {
                     allocated.push(result);
                     return result;
                 } catch (EmptyStackException e) {
+                    Assert.state(false, "available was empty on pop");
                     result = new Resource();
                     allocated.push(result);
                     return result;
