@@ -147,17 +147,21 @@ public class Ch10Test {
     }
 
     @Test
-    void uncheckedException() {
+    void checkedException() {
         Account account = new Account();
         int amount = 100;
 
-        if (!account.canWdraw(amount))
-            handleOverdrawn();
-        else {
+        try {
             account.withdraw(amount);
             doTheUsualThing();
         }
+        catch (BalanceException e) {
+            handleOverdrawn();
+        }
     }
+
+    class BalanceException extends Exception {}
+
 
     private void doTheUsualThing() {
         throw new UnsupportedOperationException();
