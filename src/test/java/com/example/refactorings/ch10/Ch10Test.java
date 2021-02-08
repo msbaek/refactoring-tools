@@ -133,13 +133,11 @@ public class Ch10Test {
     class Account {
         private int balance;
 
-        int withdraw(int amount) {
+        void withdraw(int amount) {
             if (amount > balance)
-                return -1;
-            else {
-                balance -= amount;
-                return 0;
-            }
+                throw new IllegalArgumentException("Amount too large");
+
+            balance -= amount;
         }
 
         public boolean canWdraw(int amount) {
