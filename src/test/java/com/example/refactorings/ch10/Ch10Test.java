@@ -195,14 +195,12 @@ public class Ch10Test {
             Resource result;
             if (available.isEmpty()) {
                 result = new Resource();
-                allocated.push(result);
-                return result;
-        }
+            }
             else {
                 result = (Resource) available.pop();
-                allocated.push(result);
-                return result;
             }
+            allocated.push(result);
+            return result;
         }
     }
 
