@@ -134,15 +134,6 @@ public class Ch10Test {
     class Account {
         private int balance;
 
-        int withdraw(int amount) {
-            try {
-                newWithdraw(amount);
-                return 0;
-            } catch (BalanceException e) {
-                return -1;
-            }
-        }
-
         void newWithdraw(int amount) throws BalanceException {
             if (amount > balance)
                 throw new BalanceException();
