@@ -197,18 +197,11 @@ public class Ch10Test {
                 result = new Resource();
                 allocated.push(result);
                 return result;
-            }
+        }
             else {
-                try {
-                    result = (Resource) available.pop();
-                    allocated.push(result);
-                    return result;
-                } catch (EmptyStackException e) {
-                    Assert.state(false, "available was empty on pop");
-                    result = new Resource();
-                    allocated.push(result);
-                    return result;
-                }
+                result = (Resource) available.pop();
+                allocated.push(result);
+                return result;
             }
         }
     }
