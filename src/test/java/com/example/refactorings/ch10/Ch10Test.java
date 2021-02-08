@@ -1,6 +1,7 @@
 package com.example.refactorings.ch10;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.util.Assert;
 
 import java.util.*;
 
@@ -135,7 +136,7 @@ public class Ch10Test {
 
         void withdraw(int amount) {
             if (amount > balance)
-                throw new IllegalArgumentException("Amount too large");
+                Assert.isTrue(amount <= balance, "sufficient funds");
 
             balance -= amount;
         }
