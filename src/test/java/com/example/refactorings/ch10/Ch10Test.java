@@ -160,11 +160,11 @@ public class Ch10Test {
         Account account = new Account();
         int amount = 100;
 
-        if(account.withdraw(amount) == -1) {
-            handleOverdrawn();
-        }
-        else {
+        try {
+            account.newWithdraw(amount);
             doTheUsualThing();
+        } catch (BalanceException e) {
+            handleOverdrawn();
         }
     }
 
