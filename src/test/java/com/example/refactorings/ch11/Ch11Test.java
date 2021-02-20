@@ -90,6 +90,10 @@ public class Ch11Test {
         private boolean isLabor;
     }
 
+    class LaborItem extends JobItem {
+    }
+
+
     class Employee {
         public Employee(int rate) {
             this.rate = rate;
