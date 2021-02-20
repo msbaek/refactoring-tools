@@ -350,7 +350,10 @@ public class RefactoringTest {
     void wrapReturnValue() {
     }
 
-    class Order {
+    class AbstractOrder {
+    }
+
+    class Order extends AbstractOrder {
         String customer;
 
         String getCustomer() {
