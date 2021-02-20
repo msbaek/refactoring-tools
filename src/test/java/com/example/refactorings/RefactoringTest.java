@@ -351,11 +351,10 @@ public class RefactoringTest {
     }
 
     class AbstractOrder {
+        String customer;
     }
 
     class Order extends AbstractOrder {
-        String customer;
-
         String getCustomer() {
             return customer;
         }
