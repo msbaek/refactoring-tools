@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Ch11Test {
     abstract class Customer {
-        private LocalDate billDate;
+        protected LocalDate billDate;
 
         public void addBill(LocalDate date, Double amount) {
         }
@@ -22,7 +22,6 @@ public class Ch11Test {
     }
 
     class RegularCustomer extends Customer {
-
         @Override
         protected double chargeFor(LocalDate lastBillDate, LocalDate date) {
             return 1;
@@ -30,13 +29,28 @@ public class Ch11Test {
     }
 
     class PreferredCustomer extends Customer {
-        public void createBill(LocalDate date) {
-            super.createBill(date);
+        public PreferredCustomer() {
+            billDate = LocalDate.now();
         }
 
         @Override
         protected double chargeFor(LocalDate lastBillDate, LocalDate date) {
             return 2;
         }
+    }
+
+    class Employee {
+        protected String name;
+        protected String id;
+    }
+
+    class Manager extends Employee {
+        public Manager(String name, String id, int grade) {
+            name = name;
+            id = id;
+            grade = grade;
+        }
+
+        private int grade;
     }
 }
