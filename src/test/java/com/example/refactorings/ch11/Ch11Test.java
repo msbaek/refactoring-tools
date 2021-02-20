@@ -3,7 +3,7 @@ package com.example.refactorings.ch11;
 import java.time.LocalDate;
 
 public class Ch11Test {
-    class Customer {
+    abstract class Customer {
         private LocalDate billDate;
 
         public void addBill(LocalDate date, Double amount) {
@@ -12,6 +12,8 @@ public class Ch11Test {
         public LocalDate lastBillDate() {
             return billDate;
         }
+
+        protected abstract double chargeFor(LocalDate lastBillDate, LocalDate date);
     }
 
     class RegularCustomer extends Customer {
@@ -20,7 +22,8 @@ public class Ch11Test {
             addBill(date, chargeAmount);
         }
 
-        private double chargeFor(LocalDate lastBillDate, LocalDate date) {
+        @Override
+        protected double chargeFor(LocalDate lastBillDate, LocalDate date) {
             return 1;
         }
     }
