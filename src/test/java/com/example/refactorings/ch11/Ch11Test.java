@@ -114,6 +114,6 @@ public class Ch11Test {
     @Test
     void laborItemClient() {
         Employee kent = new Employee(1);
-        JobItem jobItem = new JobItem(0, 5, true, kent);
+        JobItem jobItem = new LaborItem(0, 5, true, kent);
     }
 }
