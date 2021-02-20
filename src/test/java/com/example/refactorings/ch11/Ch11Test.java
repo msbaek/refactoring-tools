@@ -61,11 +61,16 @@ public class Ch11Test {
     }
 
     class JobItem {
-        public JobItem(int unitPrice, int quantity, boolean isLabor, Employee employee) {
+        protected JobItem(int unitPrice, int quantity, boolean isLabor, Employee employee) {
             this.unitPrice = unitPrice;
             this.quantity = quantity;
             this.isLabor = isLabor;
             this.employee = employee;
+        }
+
+        public JobItem(int unitPrice, int quantity) {
+            this.unitPrice = unitPrice;
+            this.quantity = quantity;
         }
 
         public int getTotalPrice() {
