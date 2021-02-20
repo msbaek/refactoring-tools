@@ -13,14 +13,15 @@ public class Ch11Test {
             return billDate;
         }
 
-        protected abstract double chargeFor(LocalDate lastBillDate, LocalDate date);
-    }
-
-    class RegularCustomer extends Customer {
         public void createBill(LocalDate date) {
             double chargeAmount = chargeFor(lastBillDate(), date);
             addBill(date, chargeAmount);
         }
+
+        protected abstract double chargeFor(LocalDate lastBillDate, LocalDate date);
+    }
+
+    class RegularCustomer extends Customer {
 
         @Override
         protected double chargeFor(LocalDate lastBillDate, LocalDate date) {
@@ -30,11 +31,11 @@ public class Ch11Test {
 
     class PreferredCustomer extends Customer {
         public void createBill(LocalDate date) {
-            double chargeAmount = chargeFor(lastBillDate(), date);
-            addBill(date, chargeAmount);
+            super.createBill(date);
         }
 
-        private double chargeFor(LocalDate lastBillDate, LocalDate date) {
+        @Override
+        protected double chargeFor(LocalDate lastBillDate, LocalDate date) {
             return 2;
         }
     }
