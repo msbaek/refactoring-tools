@@ -91,6 +91,9 @@ public class Ch11Test {
     }
 
     class LaborItem extends JobItem {
+        public LaborItem(int unitPrice, int quantity, boolean isLabor, Employee employee) {
+            super(unitPrice, quantity, isLabor, employee);
+        }
     }
 
 
