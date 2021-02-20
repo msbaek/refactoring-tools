@@ -1,5 +1,7 @@
 package com.example.refactorings.ch11;
 
+import org.junit.jupiter.api.Test;
+
 import java.time.LocalDate;
 
 public class Ch11Test {
@@ -107,5 +109,11 @@ public class Ch11Test {
         }
 
         private int rate;
+    }
+
+    @Test
+    void laborItemClient() {
+        Employee kent = new Employee(1);
+        JobItem jobItem = new JobItem(0, 5, true, kent);
     }
 }
