@@ -39,22 +39,66 @@ public class Ch11Test {
         }
     }
 
-    class Employee {
+    class EmployeeOld {
         protected String name;
         protected String id;
 
-        public Employee(String name, String id) {
+        public EmployeeOld(String name, String id) {
             this.name = name;
             this.id = id;
         }
     }
 
-    class Manager extends Employee {
+    class Manager extends EmployeeOld {
         public Manager(String name, String id, int grade) {
             super(name, id);
             grade = grade;
         }
 
         private int grade;
+    }
+
+    class JobItem {
+        public JobItem(int unitPrice, int quantity, boolean isLabor, Employee employee) {
+            this.unitPrice = unitPrice;
+            this.quantity = quantity;
+            this.isLabor = isLabor;
+            this.employee = employee;
+        }
+
+        public int getTotalPrice() {
+            return getUnitPrice() * quantity;
+        }
+
+        public int getUnitPrice() {
+            return (isLabor) ?
+                    employee.getRate() :
+                    unitPrice;
+        }
+
+        public int getQuantity() {
+            return quantity;
+        }
+
+        public Employee getEmployee() {
+            return employee;
+        }
+
+        private int unitPrice;
+        private int quantity;
+        private Employee employee;
+        private boolean isLabor;
+    }
+
+    class Employee {
+        public Employee(int rate) {
+            this.rate = rate;
+        }
+
+        public int getRate() {
+            return rate;
+        }
+
+        private int rate;
     }
 }
