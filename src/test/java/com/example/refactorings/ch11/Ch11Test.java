@@ -3,6 +3,8 @@ package com.example.refactorings.ch11;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Ch11Test {
     abstract class Customer {
@@ -86,7 +88,7 @@ public class Ch11Test {
 
         private int unitPrice;
         private int quantity;
-        protected Employee employee;
+        protected EmployeeOld1 employee;
 
         protected boolean isLabor() {
             return false;
@@ -97,7 +99,7 @@ public class Ch11Test {
     }
 
     class LaborItem extends JobItem {
-        public LaborItem(int unitPrice, int quantity, Employee employee) {
+        public LaborItem(int unitPrice, int quantity, EmployeeOld1 employee) {
             super(unitPrice, quantity);
         }
 
@@ -105,7 +107,7 @@ public class Ch11Test {
             return employee.getRate();
         }
 
-        public Employee getEmployee() {
+        public EmployeeOld1 getEmployee() {
             return employee;
         }
 
@@ -115,8 +117,8 @@ public class Ch11Test {
     }
 
 
-    class Employee {
-        public Employee(int rate) {
+    class EmployeeOld1 {
+        public EmployeeOld1(int rate) {
             this.rate = rate;
         }
 
@@ -129,7 +131,62 @@ public class Ch11Test {
 
     @Test
     void laborItemClient() {
-        Employee kent = new Employee(1);
+        EmployeeOld1 kent = new EmployeeOld1(1);
         JobItem jobItem = new LaborItem(0, 5, kent);
+    }
+
+    class Employee {
+        public Employee(String name, String id, int annualCost) {
+            this.name = name;
+            this.id = id;
+            this.annualCost = annualCost;
+        }
+
+        public int getAnnualCost() {
+            return annualCost;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        private String name;
+        private int annualCost;
+        private String id;
+    }
+
+    public class Department {
+        public Department(String name) {
+            this.name = name;
+        }
+
+        public int getTotalAnnualCost() {
+            return staff.stream()
+                    .mapToInt(e -> e.getAnnualCost())
+                    .sum();
+        }
+
+        public int getHeadCount() {
+            return staff.size();
+        }
+
+        public List<Employee> getStaff() {
+            return staff;
+        }
+
+        public void addStaff(Employee arg) {
+            staff.add(arg);
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        private String name;
+        private List<Employee> staff = new ArrayList<>();
     }
 }
