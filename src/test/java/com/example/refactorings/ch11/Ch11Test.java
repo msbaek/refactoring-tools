@@ -135,7 +135,7 @@ public class Ch11Test {
         JobItem jobItem = new LaborItem(0, 5, kent);
     }
 
-    class Employee extends Party {
+    class Employee extends Party implements Billable {
         public Employee(String name, String id, int annualCost) {
             super(name);
             this.id = id;
@@ -148,16 +148,18 @@ public class Ch11Test {
         }
 
         public String getId() {
-            return id;
+ㅇ            return id;
         }
 
         private int annualCost;
         private String id;
 
+        @Override
         public int getRate() {
             return 0;
         }
 
+        @Override
         public boolean hasSpecialSkill() {
             return false;
         }
