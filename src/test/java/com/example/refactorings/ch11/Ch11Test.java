@@ -155,12 +155,13 @@ public class Ch11Test {
         private String id;
     }
 
-    public class Department {
+    public class Department extends Party {
         public Department(String name) {
-            this.name = name;
+            super(name);
         }
 
-        public int getTotalAnnualCost() {
+        @Override
+        public int getAnnualCost() {
             return staff.stream()
                     .mapToInt(e -> e.getAnnualCost())
                     .sum();
@@ -178,11 +179,6 @@ public class Ch11Test {
             staff.add(arg);
         }
 
-        public String getName() {
-            return name;
-        }
-
-        private String name;
         private List<Employee> staff = new ArrayList<>();
     }
 }
