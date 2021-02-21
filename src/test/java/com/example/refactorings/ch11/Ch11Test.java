@@ -87,19 +87,19 @@ public class Ch11Test {
             return quantity;
         }
 
-        public Employee getEmployee() {
-            return employee;
-        }
-
         private int unitPrice;
         private int quantity;
-        private Employee employee;
+        protected Employee employee;
         private boolean isLabor;
     }
 
     class LaborItem extends JobItem {
         public LaborItem(int unitPrice, int quantity) {
             super(unitPrice, quantity);
+        }
+
+        public Employee getEmployee() {
+            return employee;
         }
     }
 
