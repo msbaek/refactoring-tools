@@ -98,8 +98,8 @@ public class Ch11Test {
     }
 
     class LaborItem extends JobItem {
-        public LaborItem(int unitPrice, int quantity, boolean isLabor, Employee employee) {
-            super(unitPrice, quantity, isLabor, employee);
+        public LaborItem(int unitPrice, int quantity) {
+            super(unitPrice, quantity);
         }
     }
 
@@ -119,6 +119,6 @@ public class Ch11Test {
     @Test
     void laborItemClient() {
         Employee kent = new Employee(1);
-        JobItem jobItem = new LaborItem(0, 5, true, kent);
+        JobItem jobItem = new LaborItem(0, 5);
     }
 }
