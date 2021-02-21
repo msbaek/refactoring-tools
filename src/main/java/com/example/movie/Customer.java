@@ -54,7 +54,6 @@ public class Customer {
     }
 
     private class TextStatement extends Statement {
-
         @Override
         protected String footerString() {
             return "Amount owed is " + String.valueOf(getTotalCharge()) + "\n" +
@@ -74,32 +73,23 @@ public class Customer {
         }
     }
 
-    private class HtmlStatement {
-        public String invoke() {
-            String result = headerString();
-            for (Rental each : rentals) {
-                //show figures for each rental
-                result += eachRentalString(each);
-            }
-
-            //add footer lines
-            result += footerString();
-            return result;
-        }
-
-        private String footerString() {
+    private class HtmlStatement extends Statement {
+        @Override
+        protected String footerString() {
             return "<P>You owe <EM>" + String.valueOf(getTotalCharge()) + "</EM><P>\n"
                     + "On this rental you earned <EM>" +
                     String.valueOf(getTotalFrequentRenterPoints()) +
                     "</EM> frequent renter points<P>";
         }
 
-        private String eachRentalString(Rental each) {
+        @Override
+        protected String eachRentalString(Rental each) {
             return each.getMovie().getTitle() + ": " +
                     String.valueOf(each.getCharge()) + "<BR>\n";
         }
 
-        private String headerString() {
+        @Override
+        protected String headerString() {
             return "<H1>Rentals for <EM>" + getName() + "</EM></H1><P>\n";
         }
     }
