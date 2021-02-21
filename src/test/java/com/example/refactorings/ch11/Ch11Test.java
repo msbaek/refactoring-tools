@@ -64,7 +64,7 @@ public class Ch11Test {
         protected JobItem(int unitPrice, int quantity, boolean isLabor) {
             this.unitPrice = unitPrice;
             this.quantity = quantity;
-            this.isLabor = isLabor;
+            this.setLabor(isLabor);
         }
 
         public JobItem(int unitPrice, int quantity) {
@@ -77,7 +77,7 @@ public class Ch11Test {
         }
 
         public int getUnitPrice() {
-            return (isLabor) ?
+            return (isLabor()) ?
                     employee.getRate() :
                     unitPrice;
         }
@@ -90,6 +90,14 @@ public class Ch11Test {
         private int quantity;
         protected Employee employee;
         private boolean isLabor;
+
+        public boolean isLabor() {
+            return isLabor;
+        }
+
+        public void setLabor(boolean labor) {
+            isLabor = labor;
+        }
     }
 
     class LaborItem extends JobItem {
