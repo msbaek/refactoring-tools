@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 public class Ch11Test {
     abstract class Customer {
@@ -148,7 +149,7 @@ public class Ch11Test {
         }
 
         public String getId() {
-            return id;
+           return id;
         }
 
         private int annualCost;
@@ -198,6 +199,18 @@ public class Ch11Test {
             if (billable.hasSpecialSkill())
                 return base * 1.05;
             else return base;
+        }
+    }
+
+    class MyStack extends Vector {
+        public void push(Object element) {
+            insertElementAt(element,0);
+        }
+
+        public Object pop() {
+            Object result = firstElement();
+            removeElementAt(0);
+            return result;
         }
     }
 }
