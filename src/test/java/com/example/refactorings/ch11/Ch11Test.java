@@ -89,14 +89,12 @@ public class Ch11Test {
         private int unitPrice;
         private int quantity;
         protected Employee employee;
-        private boolean isLabor;
 
         protected boolean isLabor() {
             return false;
         }
 
         public void setLabor(boolean labor) {
-            isLabor = labor;
         }
     }
 
