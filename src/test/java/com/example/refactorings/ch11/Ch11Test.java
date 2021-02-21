@@ -135,13 +135,14 @@ public class Ch11Test {
         JobItem jobItem = new LaborItem(0, 5, kent);
     }
 
-    class Employee {
+    class Employee extends Party {
         public Employee(String name, String id, int annualCost) {
-            this.name = name;
+            super(name);
             this.id = id;
             this.annualCost = annualCost;
         }
 
+        @Override
         public int getAnnualCost() {
             return annualCost;
         }
@@ -150,11 +151,6 @@ public class Ch11Test {
             return id;
         }
 
-        public String getName() {
-            return name;
-        }
-
-        private String name;
         private int annualCost;
         private String id;
     }
