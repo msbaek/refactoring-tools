@@ -91,8 +91,8 @@ public class Ch11Test {
         protected Employee employee;
         private boolean isLabor;
 
-        public boolean isLabor() {
-            return isLabor;
+        protected boolean isLabor() {
+            return false;
         }
 
         public void setLabor(boolean labor) {
@@ -107,6 +107,10 @@ public class Ch11Test {
 
         public Employee getEmployee() {
             return employee;
+        }
+
+        protected boolean isLabor() {
+            return true;
         }
     }
 
