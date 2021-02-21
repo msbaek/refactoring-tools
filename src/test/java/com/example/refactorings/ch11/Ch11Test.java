@@ -153,6 +153,14 @@ public class Ch11Test {
 
         private int annualCost;
         private String id;
+
+        public int getRate() {
+            return 0;
+        }
+
+        public boolean hasSpecialSkill() {
+            return false;
+        }
     }
 
     public class Department extends Party {
@@ -180,5 +188,14 @@ public class Ch11Test {
         }
 
         private List<Employee> staff = new ArrayList<>();
+    }
+
+    class Timesheet {
+        double charge(Employee emp, int days) {
+            int base =  emp.getRate() * days;
+            if (emp.hasSpecialSkill())
+                return base * 1.05;
+            else return base;
+        }
     }
 }
