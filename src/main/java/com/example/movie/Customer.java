@@ -35,7 +35,7 @@ public class Customer {
         return 0;
     }
 
-    private class TextStatement {
+    private abstract class Statement {
         public String invoke() {
             String result = headerString();
             for (Rental each : rentals) {
@@ -48,18 +48,28 @@ public class Customer {
             return result;
         }
 
-        private String footerString() {
+        protected abstract String headerString();
+        protected abstract String eachRentalString(Rental each);
+        protected abstract String footerString();
+    }
+
+    private class TextStatement extends Statement {
+
+        @Override
+        protected String footerString() {
             return "Amount owed is " + String.valueOf(getTotalCharge()) + "\n" +
                     "You earned " + String.valueOf(getTotalFrequentRenterPoints()) +
                     " frequent renter points";
         }
 
-        private String eachRentalString(Rental each) {
+        @Override
+        protected String eachRentalString(Rental each) {
             return "\t" + each.getMovie().getTitle() + "\t" +
                     String.valueOf(each.getCharge()) + "\n";
         }
 
-        private String headerString() {
+        @Override
+        protected String headerString() {
             return "Rental Record for " + getName() + "\n";
         }
     }
