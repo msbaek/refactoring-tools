@@ -148,7 +148,7 @@ public class Ch11Test {
         }
 
         public String getId() {
-ㅇ            return id;
+            return id;
         }
 
         private int annualCost;
@@ -193,9 +193,9 @@ public class Ch11Test {
     }
 
     class Timesheet {
-        double charge(Employee emp, int days) {
-            int base =  emp.getRate() * days;
-            if (emp.hasSpecialSkill())
+        double charge(Billable billable, int days) {
+            int base =  billable.getRate() * days;
+            if (billable.hasSpecialSkill())
                 return base * 1.05;
             else return base;
         }
