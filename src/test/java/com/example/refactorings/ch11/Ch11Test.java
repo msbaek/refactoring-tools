@@ -77,9 +77,7 @@ public class Ch11Test {
         }
 
         public int getUnitPrice() {
-            return (isLabor()) ?
-                    employee.getRate() :
-                    unitPrice;
+            return unitPrice;
         }
 
         public int getQuantity() {
@@ -101,6 +99,10 @@ public class Ch11Test {
     class LaborItem extends JobItem {
         public LaborItem(int unitPrice, int quantity, Employee employee) {
             super(unitPrice, quantity);
+        }
+
+        public int getUnitPrice() {
+            return employee.getRate();
         }
 
         public Employee getEmployee() {
