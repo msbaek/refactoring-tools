@@ -1,11 +1,13 @@
 package com.example.movie;
 
+import javax.swing.plaf.nimbus.State;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Customer {
     private String name;
     private List<Rental> rentals = new ArrayList<>();
+    private Statement statement;
 
     public Customer(String name) {
         this.name = name;
@@ -20,11 +22,7 @@ public class Customer {
     }
 
     public String statement() {
-        return new TextStatement().invoke();
-    }
-
-    public String htmlStatement() {
-        return new HtmlStatement().invoke();
+        return statement.invoke();
     }
 
     private int getTotalFrequentRenterPoints() {
