@@ -61,11 +61,10 @@ public class Ch11Test {
     }
 
     class JobItem {
-        protected JobItem(int unitPrice, int quantity, boolean isLabor, Employee employee) {
+        protected JobItem(int unitPrice, int quantity, boolean isLabor) {
             this.unitPrice = unitPrice;
             this.quantity = quantity;
             this.isLabor = isLabor;
-            this.employee = employee;
         }
 
         public JobItem(int unitPrice, int quantity) {
@@ -94,7 +93,7 @@ public class Ch11Test {
     }
 
     class LaborItem extends JobItem {
-        public LaborItem(int unitPrice, int quantity) {
+        public LaborItem(int unitPrice, int quantity, Employee employee) {
             super(unitPrice, quantity);
         }
 
@@ -119,6 +118,6 @@ public class Ch11Test {
     @Test
     void laborItemClient() {
         Employee kent = new Employee(1);
-        JobItem jobItem = new LaborItem(0, 5);
+        JobItem jobItem = new LaborItem(0, 5, kent);
     }
 }
