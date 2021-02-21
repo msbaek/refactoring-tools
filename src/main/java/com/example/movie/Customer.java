@@ -37,35 +37,60 @@ public class Customer {
 
     private class TextStatement {
         public String invoke() {
-            String result = "Rental Record for " + getName() + "\n";
+            String result = headerString();
             for (Rental each : rentals) {
                 //show figures for this rental
-                result += "\t" + each.getMovie().getTitle()+ "\t" +
-                        String.valueOf(each.getCharge()) + "\n";
+                result += eachRentalString(each);
             }
 
             //add footer lines
-            result +=  "Amount owed is " + String.valueOf(getTotalCharge()) + "\n";
-            result += "You earned " + String.valueOf(getTotalFrequentRenterPoints()) +
-                    " frequent renter points";
+            result += footerString();
             return result;
+        }
+
+        private String footerString() {
+            return "Amount owed is " + String.valueOf(getTotalCharge()) + "\n" +
+                    "You earned " + String.valueOf(getTotalFrequentRenterPoints()) +
+                    " frequent renter points";
+        }
+
+        private String eachRentalString(Rental each) {
+            return "\t" + each.getMovie().getTitle() + "\t" +
+                    String.valueOf(each.getCharge()) + "\n";
+        }
+
+        private String headerString() {
+            return "Rental Record for " + getName() + "\n";
         }
     }
 
     private class HtmlStatement {
         public String invoke() {
-            String result = "<H1>Rentals for <EM>" + getName() + "</EM></H1><P>\n";
+            String result = headerString();
             for (Rental each : rentals) {
                 //show figures for each rental
-                result += each.getMovie().getTitle()+ ": " +
-                        String.valueOf(each.getCharge()) + "<BR>\n";
+                result += eachRentalString(each);
             }
+
             //add footer lines
-            result +=  "<P>You owe <EM>" + String.valueOf(getTotalCharge()) + "</EM><P>\n";
-            result += "On this rental you earned <EM>" +
+            result += footerString();
+            return result;
+        }
+
+        private String footerString() {
+            return "<P>You owe <EM>" + String.valueOf(getTotalCharge()) + "</EM><P>\n"
+                    + "On this rental you earned <EM>" +
                     String.valueOf(getTotalFrequentRenterPoints()) +
                     "</EM> frequent renter points<P>";
-            return result;
+        }
+
+        private String eachRentalString(Rental each) {
+            return each.getMovie().getTitle() + ": " +
+                    String.valueOf(each.getCharge()) + "<BR>\n";
+        }
+
+        private String headerString() {
+            return "<H1>Rentals for <EM>" + getName() + "</EM></H1><P>\n";
         }
     }
 }
