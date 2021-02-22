@@ -136,8 +136,8 @@ public class Ch11Test {
         JobItem jobItem = new LaborItem(0, 5, kent);
     }
 
-    class Employee extends Party implements Billable {
-        public Employee(String name, String id, int annualCost) {
+    class EmployeeOld2 extends Party implements Billable {
+        public EmployeeOld2(String name, String id, int annualCost) {
             super(name);
             this.id = id;
             this.annualCost = annualCost;
@@ -182,15 +182,15 @@ public class Ch11Test {
             return staff.size();
         }
 
-        public List<Employee> getStaff() {
+        public List<EmployeeOld2> getStaff() {
             return staff;
         }
 
-        public void addStaff(Employee arg) {
+        public void addStaff(EmployeeOld2 arg) {
             staff.add(arg);
         }
 
-        private List<Employee> staff = new ArrayList<>();
+        private List<EmployeeOld2> staff = new ArrayList<>();
     }
 
     class Timesheet {
@@ -224,21 +224,31 @@ public class Ch11Test {
         }
     }
 
+    class Employee {
+        Person person = new Person();
 
+        public String getName() {
+            return person.getName();
+        }
+        public void setName(String arg) {
+            person.setName(arg);
+        }
+        public String toString () {
+            return "Emp: " + person.getLastName();
+        }
+    }
 
+    class Person {
+        String name;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        public String getName() {
+            return name;
+        }
+        public void setName(String arg) {
+            name = arg;
+        }
+        public String getLastName() {
+            return name.substring(name.lastIndexOf(' ')+1);
+        }
+    }
 }
