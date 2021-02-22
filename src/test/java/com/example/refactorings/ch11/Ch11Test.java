@@ -225,16 +225,10 @@ public class Ch11Test {
     }
 
     class Employee extends Person {
-        Person person = new Person();
+        Person person = this;
 
-        public String getName() {
-            return person.getName();
-        }
-        public void setName(String arg) {
-            person.setName(arg);
-        }
         public String toString () {
-            return "Emp: " + person.getLastName();
+            return "Emp: " + getLastName();
         }
     }
 
