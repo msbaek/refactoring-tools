@@ -224,7 +224,7 @@ public class Ch11Test {
         }
     }
 
-    class Employee {
+    class Employee extends Person {
         Person person = new Person();
 
         public String getName() {
