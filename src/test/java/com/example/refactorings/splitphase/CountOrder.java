@@ -35,7 +35,8 @@ public class CountOrder {
         File input = Paths.get(filename).toFile();
         ObjectMapper mapper = new ObjectMapper();
         Order[] orders = mapper.readValue(input, Order[].class);
-        if (Arrays.asList(args).contains("-r")) {
+        boolean onlyCountReady = Arrays.asList(args).contains("-r");
+        if (onlyCountReady) {
             return Arrays.stream(orders)
                          .filter(o -> "ready".equals(o.status()))
                          .count();
