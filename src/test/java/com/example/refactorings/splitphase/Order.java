@@ -6,7 +6,7 @@ record Product(double basePrice, double discountThreshold, double discountRate) 
 record ShippingMethod(double discountThreshold, double discountedFee, Double feePerCase) {
 }
 
-record PriceData(double basePrice, int quantity) {
+record PriceData(double basePrice, int quantity, double discount) {
 }
 
 public class Order {
@@ -14,15 +14,15 @@ public class Order {
         double basePrice = product.basePrice() * quantity;
         double discount = Math.max(quantity - product.discountThreshold(), 0)
                 * product.basePrice() * product.discountRate();
-        PriceData priceData = new PriceData(basePrice, quantity );
-        double price = applyShippingPrice(priceData, shippingMethod, discount);
+        PriceData priceData = new PriceData(basePrice, quantity, discount);
+        double price = applyShippingPrice(priceData, shippingMethod);
         return price;
     }
 
-    private double applyShippingPrice(PriceData priceData, ShippingMethod shippingMethod, double discount) {
+    private double applyShippingPrice(PriceData priceData, ShippingMethod shippingMethod) {
         double shippingPerCase = (priceData.basePrice() > shippingMethod.discountThreshold())
                 ? shippingMethod.discountedFee() : shippingMethod.feePerCase();
         double shippingCost = priceData.quantity() * shippingPerCase;
-        return priceData.basePrice() - discount + shippingCost;
+        return priceData.basePrice() - priceData.discount() + shippingCost;
     }
 }
