@@ -28,7 +28,8 @@ public class CountOrder {
             throw new RuntimeException("파일명을 입력하세요");
         String filename = args[args.length - 1];
         CommandLine commandLine = new CommandLine();
-        return countOrders(commandLine, filename, Arrays.asList(args).contains("-r"));
+        boolean onlyCountReady = Arrays.asList(args).contains("-r");
+        return countOrders(commandLine, filename, onlyCountReady);
     }
 
     private static long countOrders(CommandLine commandLine, String filename, boolean onlyCountReady) throws IOException {
