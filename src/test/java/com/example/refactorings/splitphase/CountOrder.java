@@ -24,12 +24,17 @@ public class CountOrder {
     }
 
     private static long run(String[] args) throws IOException {
+        CommandLine commandLine = parseCommandLine(args);
+        return countOrders(commandLine);
+    }
+
+    private static CommandLine parseCommandLine(String[] args) {
         if (args.length == 0)
             throw new RuntimeException("파일명을 입력하세요");
         String filename = args[args.length - 1];
         boolean onlyCountReady = Arrays.asList(args).contains("-r");
         CommandLine commandLine = new CommandLine(onlyCountReady, filename);
-        return countOrders(commandLine);
+        return commandLine;
     }
 
     private static long countOrders(CommandLine commandLine) throws IOException {
