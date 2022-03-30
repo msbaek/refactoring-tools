@@ -8,18 +8,17 @@ record ShippingMethod(double discountThreshold, double discountedFee, Double fee
 
 public class Order {
     double priceOrder(Product product, int quantity, ShippingMethod shippingMethod) {
-        final double basePrice = product.basePrice() * quantity;
-        final double discount = Math.max(quantity - product.discountThreshold(), 0)
+        double basePrice = product.basePrice() * quantity;
+        double discount = Math.max(quantity - product.discountThreshold(), 0)
                 * product.basePrice() * product.discountRate();
-        final double price = applyShippingPrice(quantity, shippingMethod, basePrice, discount);
+        double price = applyShippingPrice(quantity, shippingMethod, basePrice, discount);
         return price;
     }
 
     private double applyShippingPrice(int quantity, ShippingMethod shippingMethod, double basePrice, double discount) {
-        final double shippingPerCase = (basePrice > shippingMethod.discountThreshold())
+        double shippingPerCase = (basePrice > shippingMethod.discountThreshold())
                 ? shippingMethod.discountedFee() : shippingMethod.feePerCase();
-        final double shippingCost = quantity * shippingPerCase;
-        final double price = basePrice - discount + shippingCost;
-        return price;
+        double shippingCost = quantity * shippingPerCase;
+        return basePrice - discount + shippingCost;
     }
 }
