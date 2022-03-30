@@ -15,11 +15,11 @@ public class Order {
         double discount = Math.max(quantity - product.discountThreshold(), 0)
                 * product.basePrice() * product.discountRate();
         PriceData priceData = new PriceData(basePrice, quantity );
-        double price = applyShippingPrice(priceData, quantity, shippingMethod, discount);
+        double price = applyShippingPrice(priceData, shippingMethod, discount);
         return price;
     }
 
-    private double applyShippingPrice(PriceData priceData, int quantity, ShippingMethod shippingMethod, double discount) {
+    private double applyShippingPrice(PriceData priceData, ShippingMethod shippingMethod, double discount) {
         double shippingPerCase = (priceData.basePrice() > shippingMethod.discountThreshold())
                 ? shippingMethod.discountedFee() : shippingMethod.feePerCase();
         double shippingCost = priceData.quantity() * shippingPerCase;
