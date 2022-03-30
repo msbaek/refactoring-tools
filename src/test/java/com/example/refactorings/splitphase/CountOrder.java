@@ -20,14 +20,18 @@ public class CountOrder {
         }
     }
 
+    static class CommandLine {
+    }
+
     private static long run(String[] args) throws IOException {
         if (args.length == 0)
             throw new RuntimeException("파일명을 입력하세요");
         String filename = args[args.length - 1];
-        return countOrders(args, filename);
+        CommandLine commandLine = new CommandLine();
+        return countOrders(commandLine, args, filename);
     }
 
-    private static long countOrders(String[] args, String filename) throws IOException {
+    private static long countOrders(CommandLine commandLine, String[] args, String filename) throws IOException {
         File input = Paths.get(filename).toFile();
         ObjectMapper mapper = new ObjectMapper();
         Order[] orders = mapper.readValue(input, Order[].class);
