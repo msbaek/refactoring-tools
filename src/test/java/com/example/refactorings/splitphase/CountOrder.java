@@ -28,14 +28,13 @@ public class CountOrder {
             throw new RuntimeException("파일명을 입력하세요");
         String filename = args[args.length - 1];
         CommandLine commandLine = new CommandLine();
-        return countOrders(commandLine, args, filename);
+        return countOrders(commandLine, filename, Arrays.asList(args).contains("-r"));
     }
 
-    private static long countOrders(CommandLine commandLine, String[] args, String filename) throws IOException {
+    private static long countOrders(CommandLine commandLine, String filename, boolean onlyCountReady) throws IOException {
         File input = Paths.get(filename).toFile();
         ObjectMapper mapper = new ObjectMapper();
         Order[] orders = mapper.readValue(input, Order[].class);
-        boolean onlyCountReady = Arrays.asList(args).contains("-r");
         if (onlyCountReady) {
             return Arrays.stream(orders)
                          .filter(o -> "ready".equals(o.status()))
