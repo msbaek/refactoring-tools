@@ -20,7 +20,7 @@ public class CountOrder {
         }
     }
 
-    record CommandLine(boolean onlyCountReady) {
+    private record CommandLine(boolean onlyCountReady, String filename) {
     }
 
     private static long run(String[] args) throws IOException {
@@ -28,12 +28,12 @@ public class CountOrder {
             throw new RuntimeException("파일명을 입력하세요");
         String filename = args[args.length - 1];
         boolean onlyCountReady = Arrays.asList(args).contains("-r");
-        CommandLine commandLine = new CommandLine(onlyCountReady);
-        return countOrders(commandLine, filename);
+        CommandLine commandLine = new CommandLine(onlyCountReady, filename);
+        return countOrders(commandLine);
     }
 
-    private static long countOrders(CommandLine commandLine, String filename) throws IOException {
-        File input = Paths.get(filename).toFile();
+    private static long countOrders(CommandLine commandLine) throws IOException {
+        File input = Paths.get(commandLine.filename()).toFile();
         ObjectMapper mapper = new ObjectMapper();
         Order[] orders = mapper.readValue(input, Order[].class);
         if (commandLine.onlyCountReady()) {
