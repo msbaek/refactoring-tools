@@ -13,14 +13,14 @@ public class CountOrder {
 
     public static void main(String[] args) {
         try {
-            run(args);
+            System.out.println(run(args));
         } catch (Exception e) {
             System.err.println(e);
             System.exit(1);
         }
     }
 
-    private static void run(String[] args) throws IOException {
+    private static long run(String[] args) throws IOException {
         if (args.length == 0)
             throw new RuntimeException("파일명을 입력하세요");
         String filename = args[args.length - 1];
@@ -28,11 +28,11 @@ public class CountOrder {
         ObjectMapper mapper = new ObjectMapper();
         Order[] orders = mapper.readValue(input, Order[].class);
         if (Arrays.asList(args).contains("-r")) {
-            System.out.println(Arrays.stream(orders)
-                                     .filter(o -> "ready".equals(o.status()))
-                                     .count());
+            return Arrays.stream(orders)
+                         .filter(o -> "ready".equals(o.status()))
+                         .count();
         }
         else
-            System.out.println(orders.length);
+            return orders.length;
     }
 }
