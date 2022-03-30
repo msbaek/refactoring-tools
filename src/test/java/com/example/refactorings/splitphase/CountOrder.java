@@ -20,15 +20,15 @@ public class CountOrder {
         }
     }
 
-    static class CommandLine {
+    record CommandLine(boolean onlyCountReady) {
     }
 
     private static long run(String[] args) throws IOException {
         if (args.length == 0)
             throw new RuntimeException("파일명을 입력하세요");
         String filename = args[args.length - 1];
-        CommandLine commandLine = new CommandLine();
         boolean onlyCountReady = Arrays.asList(args).contains("-r");
+        CommandLine commandLine = new CommandLine(onlyCountReady);
         return countOrders(commandLine, filename, onlyCountReady);
     }
 
