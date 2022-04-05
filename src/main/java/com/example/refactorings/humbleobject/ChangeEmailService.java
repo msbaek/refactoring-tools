@@ -13,11 +13,11 @@ public class ChangeEmailService {
 
     public void changeEmail(int userId, String newEmail) {
         User user = userRepository.findById(userId);
+        Company company = companyRepository.findById(user.companyId());
+
         if (user.email().equals(newEmail)) {
             return;
         }
-
-        Company company = companyRepository.findById(user.companyId());
         String companyDomainName = company.domainName();
         int noOfEmployees = company.noOfEmployees();
 
@@ -29,12 +29,11 @@ public class ChangeEmailService {
             int delta = newUserType == UserType.Employee ? 1 : -1;
             int newNumbers = noOfEmployees + delta;
             company.noOfEmployees(newNumbers);
-            companyRepository.save(company);
         }
-
         user.email(newEmail);
         user.userType(newUserType);
 
+        companyRepository.save(company);
         userRepository.save(user);
         messageBus.sendEmailChangedMessage(userId, newEmail);
     }
