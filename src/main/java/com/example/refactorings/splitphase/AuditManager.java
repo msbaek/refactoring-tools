@@ -6,14 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-class Sorted {
-    public final int index;
-    public final String path;
-
-    Sorted(int index, String path) {
-        this.index = index;
-        this.path = path;
-    }
+record Sorted(int index, String path) {
 }
 
 class Path {
@@ -51,8 +44,8 @@ public class AuditManager {
             return;
         }
 
-        int currentFileIndex = sorted[sorted.length - 1].index;
-        String currentFilePath = sorted[sorted.length - 1].path;
+        int currentFileIndex = sorted[sorted.length - 1].index();
+        String currentFilePath = sorted[sorted.length - 1].path();
         List<String> lines = new ArrayList<>(fileSystem.readAllLines(currentFilePath));
 
         if (lines.size() < maxEntriesPerFile) {
