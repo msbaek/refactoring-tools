@@ -15,4 +15,9 @@ public class Company {
     public void noOfEmployees(int newNumbers) {
         this.noOfEmployees = newNumbers;
     }
+
+    boolean isEmailCorporate(String newEmail) {
+        String emailDomain = newEmail.split("@")[1];
+        return emailDomain.equals(domainName);
+    }
 }
