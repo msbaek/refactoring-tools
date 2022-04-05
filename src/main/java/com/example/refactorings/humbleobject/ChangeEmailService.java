@@ -27,8 +27,7 @@ public class ChangeEmailService {
             return;
         }
         int noOfEmployees = company.noOfEmployees();
-        String emailDomain = newEmail.split("@")[1];
-        boolean isEmailCorporate = emailDomain.equals(company.domainName());
+        boolean isEmailCorporate = isEmailCorporate(newEmail, company);
 
         UserType newUserType = isEmailCorporate ? UserType.Employee : UserType.Customer;
         if (user.userType() != newUserType) {
@@ -38,5 +37,10 @@ public class ChangeEmailService {
         }
         user.email(newEmail);
         user.userType(newUserType);
+    }
+
+    private boolean isEmailCorporate(String newEmail, Company company) {
+        String emailDomain = newEmail.split("@")[1];
+        return emailDomain.equals(company.domainName());
     }
 }
