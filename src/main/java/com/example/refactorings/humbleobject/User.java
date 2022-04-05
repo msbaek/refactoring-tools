@@ -25,4 +25,18 @@ public class User {
     public UserType userType() {
         return this.userType;
     }
+
+    void changeEmail(String newEmail, Company company) {
+        if (email().equals(newEmail)) {
+            return;
+        }
+
+        UserType newUserType = company.isEmailCorporate(newEmail) ? UserType.Employee : UserType.Customer;
+        if (userType() != newUserType) {
+            int delta = newUserType == UserType.Employee ? 1 : -1;
+            company.updateNoOfEmployees(delta);
+        }
+        email(newEmail);
+        userType(newUserType);
+    }
 }

@@ -15,25 +15,10 @@ public class ChangeEmailService {
         User user = userRepository.findById(userId);
         Company company = companyRepository.findById(user.companyId());
 
-        changeEmail(newEmail, user, company);
+        user.changeEmail(newEmail, company);
 
         companyRepository.save(company);
         userRepository.save(user);
         messageBus.sendEmailChangedMessage(userId, newEmail);
     }
-
-    private void changeEmail(String newEmail, User user, Company company) {
-        if (user.email().equals(newEmail)) {
-            return;
-        }
-
-        UserType newUserType = company.isEmailCorporate(newEmail) ? UserType.Employee : UserType.Customer;
-        if (user.userType() != newUserType) {
-            int delta = newUserType == UserType.Employee ? 1 : -1;
-            company.updateNoOfEmployees(delta);
-        }
-        user.email(newEmail);
-        user.userType(newUserType);
-    }
-
 }
