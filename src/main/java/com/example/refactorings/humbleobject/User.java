@@ -1,10 +1,18 @@
 package com.example.refactorings.humbleobject;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+record EmailChangedEvent(long userId, String newEmail) {
+}
+
 public class User {
     private long userId;
     private String email;
     private UserType userType;
     private long companyId;
+    private List<EmailChangedEvent> emailChangedEvents = new ArrayList<>();
 
     public long companyId() {
         return this.companyId;
@@ -27,7 +35,7 @@ public class User {
     }
 
     void changeEmail(String newEmail, Company company) {
-        if (email().equals(newEmail)) {
+        if (email.equals(newEmail)) {
             return;
         }
 
@@ -36,7 +44,12 @@ public class User {
             int delta = newUserType == UserType.Employee ? 1 : -1;
             company.updateNoOfEmployees(delta);
         }
-        email(newEmail);
-        userType(newUserType);
+        email = newEmail;
+        userType = newUserType;
+        emailChangedEvents.add(new EmailChangedEvent(userId, newEmail));
+    }
+
+    public List<EmailChangedEvent> emailChangedEvents() {
+        return Collections.unmodifiableList(emailChangedEvents);
     }
 }

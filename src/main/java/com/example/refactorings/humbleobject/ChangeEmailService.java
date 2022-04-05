@@ -19,6 +19,8 @@ public class ChangeEmailService {
 
         companyRepository.save(company);
         userRepository.save(user);
-        messageBus.sendEmailChangedMessage(userId, newEmail);
+        user.emailChangedEvents().forEach(
+                event -> messageBus.sendEmailChangedMessage(event.userId(), event.newEmail())
+        );
     }
 }
