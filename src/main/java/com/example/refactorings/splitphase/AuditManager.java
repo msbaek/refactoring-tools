@@ -9,6 +9,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 record Sorted(int index, String path) {
 }
 
+record FileContent(String FileName,String[] Lines) {
+}
+
+record FileUpdate(String fileName, String newContent) {
+}
+
 class Path {
     public static String combine(String directoryName, String fileName) {
         return directoryName + java.io.File.pathSeparator + fileName;
