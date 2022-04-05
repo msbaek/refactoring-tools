@@ -26,17 +26,14 @@ public class ChangeEmailService {
         if (user.email().equals(newEmail)) {
             return;
         }
-        int noOfEmployees = company.noOfEmployees();
-        boolean isEmailCorporate = company.isEmailCorporate(newEmail);
 
-        UserType newUserType = isEmailCorporate ? UserType.Employee : UserType.Customer;
+        UserType newUserType = company.isEmailCorporate(newEmail) ? UserType.Employee : UserType.Customer;
         if (user.userType() != newUserType) {
             int delta = newUserType == UserType.Employee ? 1 : -1;
-            int newNumbers = noOfEmployees + delta;
+            int newNumbers = company.noOfEmployees() + delta;
             company.noOfEmployees(newNumbers);
         }
         user.email(newEmail);
         user.userType(newUserType);
     }
-
 }
