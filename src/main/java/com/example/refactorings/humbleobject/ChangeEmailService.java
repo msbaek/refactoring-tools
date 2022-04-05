@@ -30,10 +30,10 @@ public class ChangeEmailService {
         UserType newUserType = company.isEmailCorporate(newEmail) ? UserType.Employee : UserType.Customer;
         if (user.userType() != newUserType) {
             int delta = newUserType == UserType.Employee ? 1 : -1;
-            int newNumbers = company.noOfEmployees() + delta;
-            company.noOfEmployees(newNumbers);
+            company.updateNoOfEmployees(delta);
         }
         user.email(newEmail);
         user.userType(newUserType);
     }
+
 }
