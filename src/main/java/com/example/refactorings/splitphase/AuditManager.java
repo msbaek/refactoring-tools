@@ -6,13 +6,23 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+class Directory {
+    public static String[] getFiles(String directoryName) {
+        throw new IllegalStateException("Directory#getFiles is not implemented yet");
+    }
+}
+
+class File {
+    public static void writeAllText(String newFile, String newRecord) {
+        throw new IllegalStateException("File#writeAllText is not implemented yet");
+    }
+
+    public static String [] readAllLines(String currentFilePath) {
+        throw new IllegalStateException("File#readAllLines is not implemented yet");
+    }
+}
+
 record Sorted(int index, String path) {
-}
-
-record FileContent(String FileName,String[] Lines) {
-}
-
-record FileUpdate(String fileName, String newContent) {
 }
 
 class Path {
@@ -21,49 +31,41 @@ class Path {
     }
 }
 
-interface FileSystem {
-    String[] getFiles(String directoryName);
-    void writeAllText(String filePath, String content);
-    List<String> readAllLines(String filePath);
-}
-
 public class AuditManager {
     private final int maxEntriesPerFile;
     private final String directoryName;
-    private final FileSystem fileSystem;
 
-    public AuditManager(int maxEntriesPerFile, String directoryName, FileSystem fileSystem) {
+    public AuditManager(int maxEntriesPerFile, String directoryName) {
         this.maxEntriesPerFile = maxEntriesPerFile;
         this.directoryName = directoryName;
-        this.fileSystem = fileSystem;
     }
 
     public void addRecord(String visitorName, LocalDateTime timeOfVisit) {
-        String[] filePaths = fileSystem.getFiles(directoryName);
+        String[] filePaths = Directory.getFiles(directoryName);
         Sorted[] sorted = sortByIndex(filePaths);
 
         String newRecord = visitorName + ';' + timeOfVisit;
 
         if (sorted.length == 0) {
             String newFile = Path.combine(directoryName, "audit_1.txt");
-            fileSystem.writeAllText(newFile, newRecord);
+            File.writeAllText(newFile, newRecord);
             return;
         }
 
         int currentFileIndex = sorted[sorted.length - 1].index();
         String currentFilePath = sorted[sorted.length - 1].path();
-        List<String> lines = new ArrayList<>(fileSystem.readAllLines(currentFilePath));
+        List<String> lines = new ArrayList<>(Arrays.asList(File.readAllLines(currentFilePath)));
 
         if (lines.size() < maxEntriesPerFile) {
             lines.add(newRecord);
             String newContent = String.join("\n", lines);
-            fileSystem.writeAllText(currentFilePath, newContent);
+            File.writeAllText(currentFilePath, newContent);
         }
         else {
             int newIndex = currentFileIndex + 1;
             String newName = "audit_" + newIndex + ".txt";
             String newFile = Path.combine(directoryName, newName);
-            fileSystem.writeAllText(newFile, newRecord);
+            File.writeAllText(newFile, newRecord);
         }
     }
 
