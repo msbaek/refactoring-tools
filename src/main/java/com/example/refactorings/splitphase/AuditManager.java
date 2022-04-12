@@ -21,6 +21,12 @@ interface FileSystem {
     public String [] readAllLines(String filePath);
 }
 
+record FileContent(String FileName,String[] Lines) {
+}
+
+record FileUpdate(String fileName, String newContent) {
+}
+
 public class AuditManager {
     private final int maxEntriesPerFile;
     private final String directoryName;
