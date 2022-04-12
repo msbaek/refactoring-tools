@@ -31,41 +31,49 @@ class Path {
     }
 }
 
+interface FileSystem {
+    String[] getFiles(String directoryName);
+    void writeAllText(String fileName, String record);
+    public String [] readAllLines(String filePath);
+}
+
 public class AuditManager {
     private final int maxEntriesPerFile;
     private final String directoryName;
+    private FileSystem fileSystem;
 
-    public AuditManager(int maxEntriesPerFile, String directoryName) {
+    public AuditManager(int maxEntriesPerFile, String directoryName, FileSystem fileSystem) {
         this.maxEntriesPerFile = maxEntriesPerFile;
         this.directoryName = directoryName;
+        this.fileSystem = fileSystem;
     }
 
     public void addRecord(String visitorName, LocalDateTime timeOfVisit) {
-        String[] filePaths = Directory.getFiles(directoryName);
+        String[] filePaths = fileSystem.getFiles(directoryName);
         Sorted[] sorted = sortByIndex(filePaths);
 
         String newRecord = visitorName + ';' + timeOfVisit;
 
         if (sorted.length == 0) {
             String newFile = Path.combine(directoryName, "audit_1.txt");
-            File.writeAllText(newFile, newRecord);
+            fileSystem.writeAllText(newFile, newRecord);
             return;
         }
 
         int currentFileIndex = sorted[sorted.length - 1].index();
         String currentFilePath = sorted[sorted.length - 1].path();
-        List<String> lines = new ArrayList<>(Arrays.asList(File.readAllLines(currentFilePath)));
+        List<String> lines = new ArrayList<>(Arrays.asList(fileSystem.readAllLines(currentFilePath)));
 
         if (lines.size() < maxEntriesPerFile) {
             lines.add(newRecord);
             String newContent = String.join("\n", lines);
-            File.writeAllText(currentFilePath, newContent);
+            fileSystem.writeAllText(currentFilePath, newContent);
         }
         else {
             int newIndex = currentFileIndex + 1;
             String newName = "audit_" + newIndex + ".txt";
             String newFile = Path.combine(directoryName, newName);
-            File.writeAllText(newFile, newRecord);
+            fileSystem.writeAllText(newFile, newRecord);
         }
     }
 
