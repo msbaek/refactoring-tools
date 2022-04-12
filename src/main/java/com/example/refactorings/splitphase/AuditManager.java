@@ -6,22 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-class Directory {
-    public static String[] getFiles(String directoryName) {
-        throw new IllegalStateException("Directory#getFiles is not implemented yet");
-    }
-}
-
-class File {
-    public static void writeAllText(String newFile, String newRecord) {
-        throw new IllegalStateException("File#writeAllText is not implemented yet");
-    }
-
-    public static String [] readAllLines(String currentFilePath) {
-        throw new IllegalStateException("File#readAllLines is not implemented yet");
-    }
-}
-
 record Sorted(int index, String path) {
 }
 
