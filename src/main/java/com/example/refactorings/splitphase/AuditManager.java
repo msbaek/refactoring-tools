@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-record Sorted(int index, String path) {
+record Sorted(int index, FileContent fileContent) {
 }
 
 class Path {
@@ -15,12 +15,7 @@ class Path {
     }
 }
 
-interface FileSystem {
-    String[] getFiles(String directoryName);
-    public String [] readAllLines(String filePath);
-}
-
-record FileContent(String FileName,String[] Lines) {
+record FileContent(String fileName, String[] lines) {
 }
 
 record FileUpdate(String fileName, String newContent) {
@@ -29,17 +24,14 @@ record FileUpdate(String fileName, String newContent) {
 public class AuditManager {
     private final int maxEntriesPerFile;
     private final String directoryName;
-    private FileSystem fileSystem;
 
-    public AuditManager(int maxEntriesPerFile, String directoryName, FileSystem fileSystem) {
+    public AuditManager(int maxEntriesPerFile, String directoryName) {
         this.maxEntriesPerFile = maxEntriesPerFile;
         this.directoryName = directoryName;
-        this.fileSystem = fileSystem;
     }
 
-    public FileUpdate addRecord(String visitorName, LocalDateTime timeOfVisit) {
-        String[] filePaths = fileSystem.getFiles(directoryName);
-        Sorted[] sorted = sortByIndex(filePaths);
+    public FileUpdate addRecord(FileContent[] files, String visitorName, LocalDateTime timeOfVisit) {
+        Sorted[] sorted = sortByIndex(files);
 
         String newRecord = visitorName + ';' + timeOfVisit;
 
@@ -49,13 +41,13 @@ public class AuditManager {
         }
 
         int currentFileIndex = sorted[sorted.length - 1].index();
-        String currentFilePath = sorted[sorted.length - 1].path();
-        List<String> lines = new ArrayList<>(Arrays.asList(fileSystem.readAllLines(currentFilePath)));
+        FileContent currentFilePath = sorted[sorted.length - 1].fileContent();
+        List<String> lines = new ArrayList<>(Arrays.asList(currentFilePath.lines()));
 
         if (lines.size() < maxEntriesPerFile) {
             lines.add(newRecord);
             String newContent = String.join("\n", lines);
-            return new FileUpdate(currentFilePath, newContent);
+            return new FileUpdate(currentFilePath.fileName(), newContent);
         }
         else {
             int newIndex = currentFileIndex + 1;
@@ -65,7 +57,7 @@ public class AuditManager {
         }
     }
 
-    private Sorted[] sortByIndex(String[] filePaths) {
+    private Sorted[] sortByIndex(FileContent[] filePaths) {
         AtomicInteger idx = new AtomicInteger(1);
         return Arrays.stream(filePaths)
                      .map(s -> new Sorted(idx.getAndIncrement(), s))
