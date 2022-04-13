@@ -17,7 +17,6 @@ class Path {
 
 interface FileSystem {
     String[] getFiles(String directoryName);
-    void writeAllText(String fileName, String record);
     public String [] readAllLines(String filePath);
 }
 
@@ -38,7 +37,7 @@ public class AuditManager {
         this.fileSystem = fileSystem;
     }
 
-    public void addRecord(String visitorName, LocalDateTime timeOfVisit) {
+    public FileUpdate addRecord(String visitorName, LocalDateTime timeOfVisit) {
         String[] filePaths = fileSystem.getFiles(directoryName);
         Sorted[] sorted = sortByIndex(filePaths);
 
@@ -46,8 +45,7 @@ public class AuditManager {
 
         if (sorted.length == 0) {
             String newFile = Path.combine(directoryName, "audit_1.txt");
-            fileSystem.writeAllText(newFile, newRecord);
-            return;
+            return new FileUpdate(newFile, newRecord);
         }
 
         int currentFileIndex = sorted[sorted.length - 1].index();
@@ -57,13 +55,13 @@ public class AuditManager {
         if (lines.size() < maxEntriesPerFile) {
             lines.add(newRecord);
             String newContent = String.join("\n", lines);
-            fileSystem.writeAllText(currentFilePath, newContent);
+            return new FileUpdate(currentFilePath, newContent);
         }
         else {
             int newIndex = currentFileIndex + 1;
             String newName = "audit_" + newIndex + ".txt";
             String newFile = Path.combine(directoryName, newName);
-            fileSystem.writeAllText(newFile, newRecord);
+            return new FileUpdate(newFile, newRecord);
         }
     }
 

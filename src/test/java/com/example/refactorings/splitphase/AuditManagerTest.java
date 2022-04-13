@@ -7,7 +7,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDateTime;
 
-import static org.mockito.Mockito.verify;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -36,10 +36,8 @@ class AuditManagerTest {
                 .thenReturn(lines);
 
         AuditManager auditManager = new AuditManager(3, directoryName, fileSystem);
-        auditManager.addRecord(visitorName, dateTime);
-
-        verify(fileSystem).writeAllText(
-                directoryName + ":audit_" + (files.length + 1) + ".txt",
-                visitorName + ";" + dateTime);
+        FileUpdate update = auditManager.addRecord(visitorName, dateTime);
+        assertThat(update.fileName()).isEqualTo("audits:audit_" + (files.length + 1) + ".txt");
+        assertThat(update.newContent()).isEqualTo(visitorName + ";" + dateTime);
     }
 }
