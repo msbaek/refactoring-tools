@@ -1,7 +1,7 @@
 # Refactoring With IntelliJ Refactoring Tools
 
 이 글은 Intellij의 Refactoring 메뉴에 있는 모든 Refactoring 기능들을 jetbrains 사이트의 예제 및 일부 보완한 예제를 통해 리팩토링시 주의 사항이나 전후를 비교한다.
-com.example.refactorings.RefactoringTest 의 각 테스트를 따라서 보면서 화면과 같이 변화가 일어나도록 진행하면 됨
+[com.example.refactorings.RefactoringTest](/src/test/java/com/example/refactorings/RefactoringTest.java) 의 각 테스트를 따라서 보면서 화면과 같이 변화가 일어나도록 진행하면 됨
 
 ## 목차
 
